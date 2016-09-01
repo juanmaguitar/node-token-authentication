@@ -1,20 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
-
-const config = require('./config'); // get our config file
 
 const apiRoutes = require('./routes/api')
 const rootRoutes = require('./routes/root')
 
-mongoose.Promise = global.Promise;
-
 const app = express();
-
-// configuration
-var port = process.env.PORT || 8080;
-mongoose.connect(config.database);
 
 // serve angular app
 app.use('/', express.static( `${__dirname}/../public`) );
@@ -28,9 +19,5 @@ app.use(morgan('dev'));
 
 app.use('/', rootRoutes);
 app.use('/api', apiRoutes);
-
-// start the server
-app.listen(port);
-console.log('Magic happens at http://localhost:' + port);
 
 module.exports = app;

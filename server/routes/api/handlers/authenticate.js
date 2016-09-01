@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const User = require('../../../models/User');
-const config = require('../../../config'); // get our config file
+const secret = process.SECRET;
+const debug = require('debug')('routes:api:authenticate');
 
 function authenticate(req, res) {
 
@@ -31,9 +32,10 @@ function authenticate(req, res) {
 
 				} else {
 
+					debug(secret);
 					// if user is found and password is right
 					// create a token
-					var token = jwt.sign(user, config.secret, {
+					var token = jwt.sign(user, secret, {
 						expiresIn: 86400 // expires in 24 hours
 					});
 
