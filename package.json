@@ -1,11 +1,30 @@
 {
   "name": "node-token-authentication",
   "main": "server.js",
+  "scripts" : {
+  	"dev": "nodemon server",
+    "start": "node server",
+    "build": "browserify src/app -o public/bundle.js -t babelify",
+    "build:watch": "watchify src/app -d -o public/bundle.js -v",
+    "build:es2015:watch": "watchify src/app -t babelify -o public/bundle.js -v"
+  },
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "jsonwebtoken": "^5.7.0",
+    "express-jwt": "~0.2.1",
     "mongoose": "^4.4.5",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "eslint-plugin-import": "^1.14.0",
+    "eslint-plugin-jsx-a11y": "^2.2.1",
+    "eslint-plugin-react": "^6.2.0"
+  },
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "eslint": "^3.4.0",
+    "eslint-config-airbnb": "^10.0.1",
+    "watchify": "^3.7.0"
   }
 }
