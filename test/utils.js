@@ -3,8 +3,8 @@ const debug = require('debug')('test:utils');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-require('dotenv').config({ path: `${__dirname}/../.env`})
-debug(`Using Test DB: ${process.env.DB_URI_TEST}`);
+const DB_URI_TEST = require('config').db_uri;
+debug(`Using Test DB: ${DB_URI_TEST}`);
 
 global.rootRequire = function(name) {
     return require(__dirname + '/../' + name);
@@ -23,7 +23,7 @@ beforeEach( (done) => {
   }
 
   const reconnect = () => {
-    mongoose.connect( process.env.DB_URI_TEST, (err) => {
+    mongoose.connect( DB_URI_TEST, (err) => {
       if (err) throw err;
       return clearDB();
     });

@@ -1,5 +1,4 @@
-//this is used to parse the profile
-const url_base64_decode = (str) => {
+function url_base64_decode(str) {
   var output = str.replace('-', '+').replace('_', '/');
   switch (output.length % 4) {
     case 0:

@@ -9,14 +9,12 @@ const showWelcome = require('./handlers/showWelcome')
 const getAllUsers = require('./handlers/getAllUsers')
 const check = require('./handlers/check')
 
-const secret = "----";
+const SECRET = require('config').secret;
 
 apiRoutes.post('/authenticate', authenticate);
 
-debug(secret);
-
 // authenticated routes
-apiRoutes.use('/', expressJwt({ secret }) ); //
+apiRoutes.use('/', expressJwt({ secret: SECRET }) ); //
 apiRoutes.get('/', showWelcome);
 apiRoutes.get('/users', getAllUsers);
 apiRoutes.get('/check', check);

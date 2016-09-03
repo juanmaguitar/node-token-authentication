@@ -2,7 +2,9 @@ const submit = require('./submit.js');
 const logout = require('./logout.js');
 const callRestricted = require('./callRestricted.js');
 
-function UserCtrl($scope, $http, $window) {
+function loginController($scope, $http, $window) {
+
+	console.log('loginController...')
 
   const name = 'Nick Cerminara';
   const password = 'password';
@@ -18,6 +20,6 @@ function UserCtrl($scope, $http, $window) {
 
 }
 
-UserCtrl.$inject = ['$scope', '$http', '$window']
+loginController.$inject = ['$scope', '$http', '$window']
 
-module.exports = UserCtrl;
+module.exports = loginController;
