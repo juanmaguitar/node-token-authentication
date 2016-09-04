@@ -4,8 +4,6 @@ const callRestricted = require('./callRestricted.js');
 
 function loginController($scope, $http, $window) {
 
-	console.log('loginController...')
-
   const name = 'Nick Cerminara';
   const password = 'password';
 

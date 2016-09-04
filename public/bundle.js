@@ -32851,13 +32851,16 @@ const angular = require('angular');
 const ngRoute = require('angular-route');
 
 const loginModule = require('./login');
+const registerModule = require('./register');
 const servicesModule = require('./services');
 
-angular.module('myApp', [ngRoute, servicesModule, loginModule]);
+console.log(loginModule);
 
-},{"./login":11,"./services":16,"angular":4,"angular-route":2}],6:[function(require,module,exports){
+angular.module('myApp', [ngRoute, servicesModule, loginModule, registerModule]);
 
-const htmlTemplate = "<form class=\"form-signin\">\n  <h2 class=\"form-signin-heading\">Please sign in</h2>\n  <label for=\"inputEmail\" class=\"sr-only\">Email address</label>\n  <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required autofocus>\n  <label for=\"inputPassword\" class=\"sr-only\">Password</label>\n  <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required>\n  <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div>\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign in</button>\n</form>\n\n\n";
+},{"./login":11,"./register":15,"./services":19,"angular":4,"angular-route":2}],6:[function(require,module,exports){
+
+const htmlTemplate = "<form class=\"form-signin\">\n  <h3 class=\"form-signin-heading\">Please Log in</h3>\n  <div>\n    <label for=\"inputEmail\" >Email address</label>\n    <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required autofocus ng-model=\"user.name\">\n  </div>\n  <div>\n    <label for=\"inputPassword\" >Password</label>\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required>\n  </div>\n  <!-- <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div> -->\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n  <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n</form>\n\n\n<!--   <div ng-controller=\"UserCtrl\">\n      <span ng-show=\"isAuthenticated\">{{welcome}}</span>\n      <form ng-show=\"!isAuthenticated\" ng-submit=\"submit()\">\n        <input ng-model=\"user.name\" type=\"text\" name=\"name\" placeholder=\"User Name\" />\n        <input ng-model=\"user.password\" type=\"password\" name=\"pass\" placeholder=\"Password\" />\n        <input type=\"submit\" value=\"Login\" />\n      </form>\n      <div>{{ error }}</div>\n      <div ng-show=\"isAuthenticated\">\n        <a ng-click=\"callRestricted()\" href=\"\">Shh, this is private!</a>\n        <br>\n        <div ng-show=\"message\">{{ message }}</div>\n        <a ng-click=\"logout()\" href=\"\">Logout</a>\n      </div>\n    </div> -->\n";
 
 function config($routeProvider) {
   $routeProvider.when('/login', {
@@ -32892,8 +32895,6 @@ const logout = require('./logout.js');
 const callRestricted = require('./callRestricted.js');
 
 function loginController($scope, $http, $window) {
-
-  console.log('loginController...');
 
   const name = 'Nick Cerminara';
   const password = 'password';
@@ -32981,6 +32982,57 @@ function url_base64_decode(str) {
 module.exports.url_base64_decode = url_base64_decode;
 
 },{}],13:[function(require,module,exports){
+
+const htmlTemplate = "<form class=\"form-signin\">\n  <h3 class=\"form-signin-heading\">Create a new user</h3>\n  <div>\n    <label for=\"inputEmail\" >Email address</label>\n    <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required autofocus ng-model=\"user.name\">\n  </div>\n  <div>\n    <label for=\"inputPassword\" >Password</label>\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required>\n  </div>\n  <!-- <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div> -->\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign Up</button>\n  <p class=\"text-right\">Or <strong><a href=\"#/login\">Log in</a></strong> if you already have an an user</p>\n</form>\n\n\n<!--   <div ng-controller=\"UserCtrl\">\n      <span ng-show=\"isAuthenticated\">{{welcome}}</span>\n      <form ng-show=\"!isAuthenticated\" ng-submit=\"submit()\">\n        <input ng-model=\"user.name\" type=\"text\" name=\"name\" placeholder=\"User Name\" />\n        <input ng-model=\"user.password\" type=\"password\" name=\"pass\" placeholder=\"Password\" />\n        <input type=\"submit\" value=\"Login\" />\n      </form>\n      <div>{{ error }}</div>\n      <div ng-show=\"isAuthenticated\">\n        <a ng-click=\"callRestricted()\" href=\"\">Shh, this is private!</a>\n        <br>\n        <div ng-show=\"message\">{{ message }}</div>\n        <a ng-click=\"logout()\" href=\"\">Logout</a>\n      </div>\n    </div> -->\n";
+
+function config($routeProvider) {
+  $routeProvider.when('/register', {
+    template: htmlTemplate,
+    controller: 'registerController'
+  });
+}
+
+config.$inject = ['$routeProvider'];
+
+module.exports = config;
+
+},{}],14:[function(require,module,exports){
+// const submit = require('./submit.js');
+// const logout = require('./logout.js');
+// const callRestricted = require('./callRestricted.js');
+
+function registerController($scope, $http, $window) {
+
+  // const name = 'Nick Cerminara';
+  // const password = 'password';
+
+  // $scope.user = { name, password };
+  // $scope.isAuthenticated = false;
+  // $scope.welcome = '';
+  // $scope.message = '';
+
+  // $scope.submit = submit.bind(null, $scope, $window, $http);
+  // $scope.logout = logout.bind(null, $scope, $window);
+  // $scope.callRestricted = callRestricted.bind(null, $scope, $http);
+
+}
+
+registerController.$inject = ['$scope', '$http', '$window'];
+
+module.exports = registerController;
+
+},{}],15:[function(require,module,exports){
+const angular = require('angular');
+const ngRoute = require('angular-route');
+
+const registerController = require('./controller');
+const registerConfig = require('./config');
+
+angular.module('myApp:register', ['ngRoute']).controller('registerController', registerController).config(registerConfig);
+
+module.exports = 'myApp:register';
+
+},{"./config":13,"./controller":14,"angular":4,"angular-route":2}],16:[function(require,module,exports){
 const request = require('./request.js');
 const responseError = require('./responseError.js');
 
@@ -32995,7 +33047,7 @@ authInterceptor.$inject = ['$q', '$window'];
 
 module.exports = authInterceptor;
 
-},{"./request.js":14,"./responseError.js":15}],14:[function(require,module,exports){
+},{"./request.js":17,"./responseError.js":18}],17:[function(require,module,exports){
 function request($window, config) {
   config.headers = config.headers || {};
   if ($window.sessionStorage.token) {
@@ -33006,7 +33058,7 @@ function request($window, config) {
 
 module.exports = request;
 
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 function responseError(rejection) {
   if (rejection.status === 401) {
     console.log("request rejected!");
@@ -33017,7 +33069,7 @@ function responseError(rejection) {
 
 module.exports = responseError;
 
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 const angular = require('angular');
 
 const authInterceptor = require('./authInterceptor');
@@ -33029,4 +33081,4 @@ angular.module('myApp:services', []).factory('authInterceptor', authInterceptor)
 
 module.exports = 'myApp:services';
 
-},{"./authInterceptor":13,"angular":4}]},{},[5]);
+},{"./authInterceptor":16,"angular":4}]},{},[5]);

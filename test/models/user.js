@@ -2,83 +2,95 @@
 
 const debug = require('debug')('test:models:user');
 var utils = require('../utils');
+var bcrypt = require('bcrypt-as-promised');
 
 var should = require('should');
-var User = rootRequire('server/models').user;
+var User = require('server/models').user;
 
 describe('Users: models', () => {
 
   describe('#create()', () => {
+
     it('should create a new User', (done) => {
 
       var testUser = {
         name: 'Barack Obama',
-        email: 'test@example.com',
+        username: 'barackforpresident',
+        emails: [{
+          type: 'office',
+          value: 'me@whitehouse.com'
+        }],
         password: 'supersecretpassword'
       };
 
       User.create(testUser, function (err, createdUser) {
-
       	debug(createdUser);
         should.not.exist(err);
         createdUser.name.should.equal('Barack Obama');
-        createdUser.email.should.equal('test@example.com');
-        createdUser.password.should.exist();
+        createdUser.username.should.equal('barackforpresident');
+        createdUser.emails[0].type.should.equal('office');
+        createdUser.emails[0].value.should.equal('me@whitehouse.com');
+        //createdUser.password.should.exist();
         done();
-
       });
+
     });
+
   })
 
   describe('#hashPassoword()', function () {
-    it('should return a hashed password asynchronously', function (done) {
+
+    it('should return a hashed password asynchronously', (done) => {
 
       var password = 'secret';
 
-      User.hashPassword(password, function (err, passwordHash) {
-        should.not.exist(err);
-        should.exist(passwordHash);
-        debug(passwordHash);
-        done();
-      });
+      User.hashPassword(password)
+        .then( (passwordHash) => {
+          should.exist(passwordHash);
+          debug(passwordHash);
+          done();
+        })
+        .catch( console.log )
+
     });
+
   });
 
-  describe('#comparePasswordAndHash()', function () {
-    it('should return true if password is valid', function (done) {
+  describe('#comparePasswordAndHash()', () => {
+
+    it('should return true if password is valid', (done) => {
 
       var password = 'secret';
 
-      User.hashPassword(password, function (err, passwordHash) {
-        User.comparePasswordAndHash(password, passwordHash, function (err, areEqual) {
-
-          should.not.exist(err);
+      User.hashPassword(password)
+        .then ( User.comparePasswordAndHash.bind(null, password) )
+        .then ( (areEqual) => {
           areEqual.should.equal(true);
           done();
+        })
+        .catch( console.error )
 
-        });
-      });
     });
-    it('should return false if password is invalid', function (done) {
+
+    it('should return a bcrypt.MISMATCH_ERROR exception if password is invalid', (done) => {
 
       var password = 'secret';
+      var fakePassword = 'imahacker';
 
-      User.hashPassword(password, function (err, passwordHash) {
-
-        var fakePassword = 'imahacker';
-
-        User.comparePasswordAndHash(fakePassword, passwordHash, function (err, areEqual) {
-
-          should.not.exist(err);
-          areEqual.should.equal(false);
+      User.hashPassword(password)
+        .then ( User.comparePasswordAndHash.bind(null, fakePassword) )
+        .catch( function(err) {
+          const errConstructor = err.constructor;
+          errConstructor.should.equal(bcrypt.MISMATCH_ERROR);
           done();
+        })
 
-        });
-      });
     });
+
   });
 
-  describe('#hasRole ', function () {
+  describe('#hasRole ', () => {
+
     var user;
 
     beforeEach( (done) => {
@@ -100,6 +112,7 @@ describe('Users: models', () => {
       user.hasRole('cowboy').should.be.false;
       done();
     });
+
   });
 
 });

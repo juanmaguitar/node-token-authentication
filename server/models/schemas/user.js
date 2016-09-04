@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-as-promised');
 const debug = require('debug')('schemas:user');
 
 var Schema = mongoose.Schema;
 
-var BCRYPT_COST = 12;
+var BCRYPT_COST = (process.env.NODE_ENV === 'test') ? 1 : 12;
 
 const emailSchema = new Schema({
   type  : {type: String},
@@ -12,30 +12,39 @@ const emailSchema = new Schema({
 });
 
 const userSchema = new Schema({
-  name: {
-    firstname: String,
-    surname: String
-  },
   username: String,
-  passwordHash: String,
+  password: String,
+  name: String,
   emails: [emailSchema],
   roles: Array
 });
 
-userSchema.statics.hashPassword = function (passwordRaw, fn) {
-  if (process.env.NODE_ENV === 'test') {
-    BCRYPT_COST = 1;
-  }
-  bcrypt.hash(passwordRaw, BCRYPT_COST, fn);
+userSchema.pre('save', function(next) {
+  const user = this;
+
+  if (!user.isModified('password')) return next();
+
+  bcrypt.hash(user.password, BCRYPT_COST)
+    .then( (hash) => {
+      debug(hash);
+      user.password = hash;
+      next();
+    })
+
+});
+
+
+
+userSchema.statics.hashPassword = function (passwordRaw) {
+  debug(`BCRYPT_COST=${BCRYPT_COST}`);
+  return bcrypt.hash(passwordRaw, BCRYPT_COST);
 };
 
-userSchema.statics.comparePasswordAndHash = (password, passwordHash, fn) => {
-  return bcrypt.compare(password, passwordHash, fn);
+userSchema.statics.comparePasswordAndHash = (password, passwordHash) => {
+  return bcrypt.compare(password, passwordHash);
 };
 
 userSchema.methods.hasRole = function(role) {
-  debug(this);
-  debug(role);
   return this.roles.includes(role);
 }
 
