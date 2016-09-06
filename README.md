@@ -50,3 +50,7 @@ TO-DO:
             * Show info user header 
             * Show logout button (redirect login)
     + Signup Form
+        + <s>Create new user in the DB</s>
+        + <s>Encrypt passs</s>
+        + Send mail to the user?
+- Recover password

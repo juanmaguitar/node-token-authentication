@@ -11,7 +11,7 @@
     "watch:js:es2015": "watchify src/js/app -t brfs -t babelify -o public/bundle.js -v",
     "watch:all": "npm run watch:css & npm run watch:js:es2015 & npm run watch:test",
     "test": "NODE_ENV=test NODE_PATH=. mocha test",
-    "watch:test": "NODE_ENV=test NODE_PATH=. DEBUG=schemas:user,test:models:user nodemon --exec 'clear && npm test'"
+    "watch:test": "NODE_ENV=test NODE_PATH=. DEBUG=schemas:user,test:models:user,services:request nodemon --exec 'clear && npm test'"
   },
   "dependencies": {
     "angular": "^1.5.8",
@@ -28,6 +28,7 @@
     "jade": "~1.11.0",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.5.10",
+    "mongoose-unique-validator": "^1.0.2",
     "morgan": "^1.7.0",
     "serve-favicon": "~2.3.0",
     "validator": "^5.5.0"

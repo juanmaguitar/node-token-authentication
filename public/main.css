@@ -5825,6 +5825,8 @@ body {
   margin: 0 auto; }
   .form-signin div {
     margin-bottom: 10px; }
+    .form-signin div:first-of-type {
+      margin-top: 25px; }
   .form-signin p {
     margin: 10px 0; }
   .form-signin.form-signin-heading, .form-signin.checkbox {

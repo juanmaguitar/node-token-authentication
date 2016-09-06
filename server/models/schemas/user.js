@@ -1,21 +1,16 @@
-var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-as-promised');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt-as-promised');
 const debug = require('debug')('schemas:user');
 
 var Schema = mongoose.Schema;
 
 var BCRYPT_COST = (process.env.NODE_ENV === 'test') ? 1 : 12;
 
-const emailSchema = new Schema({
-  type  : {type: String},
-  value : String
-});
-
 const userSchema = new Schema({
-  username: String,
-  password: String,
   name: String,
-  emails: [emailSchema],
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true, select: false },
+  email: { type: String, required: true, index: true, unique: true },
   roles: Array
 });
 

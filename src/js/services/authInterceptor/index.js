@@ -4,7 +4,7 @@ const responseError = require('./responseError.js')
 function authInterceptor($q, $window) {
   return {
     request: request.bind(null, $window),
-    responseError: request.bind(null, $q)
+    responseError: responseError.bind(null, $q)
   }
 }
 

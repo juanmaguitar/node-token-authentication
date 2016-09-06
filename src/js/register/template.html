@@ -1,13 +1,24 @@
-<form class="form-signin">
+<form class="form-signin" ng-submit="createUser()">
   <h3 class="form-signin-heading">Create a new user</h3>
-  <div>
-    <label for="inputEmail" >Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus ng-model="user.name">
+  <p><em>Fields with * are mandatory</em></p>
+
+  <div class="form-group" ng-class="{ 'has-error': errors.usernameExists }">
+    <label class="control-label" for="inputUsername" >User name *</label>
+    <input type="text" id="inputUsername" class="form-control" placeholder="User Name" required autofocus ng-model="user.username">
+    <em ng-show="errors.usernameExists" class="help-block text-right">User Name already in use! </br>Please choose another one.</em>
   </div>
-  <div>
-    <label for="inputPassword" >Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+  <div class="form-group" ng-class="{ 'has-error': errors.mailExists }">
+    <label class="control-label" for="inputEmail" >Email address *</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required ng-model="user.email">
+     <em ng-show="errors.mailExists" class="help-block text-right">Mail already exists! </br>Please choose another one.</em>
   </div>
+
+  <div class="form-group">
+    <label for="inputPassword" >Password *</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="user.password">
+  </div>
+
   <!-- <div class="checkbox">
     <label>
       <input type="checkbox" value="remember-me"> Remember me
@@ -15,6 +26,24 @@
   </div> -->
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
   <p class="text-right">Or <strong><a href="#/login">Log in</a></strong> if you already have an an user</p>
+
+ <!--  <div class="form-group has-success">
+  <label class="control-label" for="inputSuccess">Input with success</label>
+  <input type="text" class="form-control" id="inputSuccess">
+  <span class="help-block">Woohoo!</span>
+</div>
+<div class="form-group has-warning">
+  <label class="control-label" for="inputWarning">Input with warning</label>
+  <input type="text" class="form-control" id="inputWarning">
+  <span class="help-block">Something may have gone wrong</span>
+</div>
+<div class="form-group has-error">
+  <label class="control-label" for="inputError">Input with error</label>
+  <input type="text" class="form-control" id="inputError">
+  <span class="help-block">Please correct the error</span>
+</div>
+ -->
+
 </form>
 
 

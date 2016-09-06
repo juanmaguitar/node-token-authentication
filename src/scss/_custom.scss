@@ -10,6 +10,9 @@ body {
   margin: 0 auto;
   div {
     margin-bottom:10px;
+    &:first-of-type {
+      margin-top:25px
+    }
   }
   p {
     margin:10px 0;

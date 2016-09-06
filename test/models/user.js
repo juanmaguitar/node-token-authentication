@@ -16,10 +16,7 @@ describe('Users: models', () => {
       var testUser = {
         name: 'Barack Obama',
         username: 'barackforpresident',
-        emails: [{
-          type: 'office',
-          value: 'me@whitehouse.com'
-        }],
+        email: 'me@whitehouse.com',
         password: 'supersecretpassword'
       };
 
@@ -28,9 +25,7 @@ describe('Users: models', () => {
         should.not.exist(err);
         createdUser.name.should.equal('Barack Obama');
         createdUser.username.should.equal('barackforpresident');
-        createdUser.emails[0].type.should.equal('office');
-        createdUser.emails[0].value.should.equal('me@whitehouse.com');
-        //createdUser.password.should.exist();
+        createdUser.email.should.equal('me@whitehouse.com');
         done();
       });
 
@@ -91,12 +86,18 @@ describe('Users: models', () => {
 
   describe('#hasRole ', () => {
 
-    var user;
+    var user; //createdUser
 
     beforeEach( (done) => {
-      let userTest = { roles: ['admin', 'mod'] };
-      User.create(userTest, (err, createdUser) => {
+      var testUser = {
+        username: 'barackforpresident',
+        email: 'me@whitehouse.com',
+        password: 'supersecretpassword',
+        roles: ['admin', 'mod']
+      };
+      User.create(testUser, (err, createdUser) => {
         user = createdUser;
+        debug(user);
         done();
       });
     });
