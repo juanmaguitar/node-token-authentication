@@ -5,6 +5,7 @@ function submit( $scope, $window, $http ) {
   $http
     .post('/api/authenticate', $scope.user)
     .success( (data, status, headers, config) => {
+
       $window.sessionStorage.token = data.token;
       $scope.isAuthenticated = true;
       var encodedProfile = data.token.split('.')[1];

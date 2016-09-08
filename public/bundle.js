@@ -32847,6 +32847,113 @@ require('./angular');
 module.exports = angular;
 
 },{"./angular":3}],5:[function(require,module,exports){
+'use strict';
+
+(function() {
+
+    /**
+     * @ngdoc overview
+     * @name ngStorage
+     */
+
+    angular.module('ngStorage', []).
+
+    /**
+     * @ngdoc object
+     * @name ngStorage.$localStorage
+     * @requires $rootScope
+     * @requires $window
+     */
+
+    factory('$localStorage', _storageFactory('localStorage')).
+
+    /**
+     * @ngdoc object
+     * @name ngStorage.$sessionStorage
+     * @requires $rootScope
+     * @requires $window
+     */
+
+    factory('$sessionStorage', _storageFactory('sessionStorage'));
+
+    function _storageFactory(storageType) {
+        return [
+            '$rootScope',
+            '$window',
+            '$log',
+
+            function(
+                $rootScope,
+                $window,
+                $log
+            ){
+                // #9: Assign a placeholder object if Web Storage is unavailable to prevent breaking the entire AngularJS app
+                var webStorage = $window[storageType] || ($log.warn('This browser does not support Web Storage!'), {}),
+                    $storage = {
+                        $default: function(items) {
+                            for (var k in items) {
+                                angular.isDefined($storage[k]) || ($storage[k] = items[k]);
+                            }
+
+                            return $storage;
+                        },
+                        $reset: function(items) {
+                            for (var k in $storage) {
+                                '$' === k[0] || delete $storage[k];
+                            }
+
+                            return $storage.$default(items);
+                        }
+                    },
+                    _last$storage,
+                    _debounce;
+
+                for (var i = 0, k; i < webStorage.length; i++) {
+                    // #8, #10: `webStorage.key(i)` may be an empty string (or throw an exception in IE9 if `webStorage` is empty)
+                    (k = webStorage.key(i)) && 'ngStorage-' === k.slice(0, 10) && ($storage[k.slice(10)] = angular.fromJson(webStorage.getItem(k)));
+                }
+
+                _last$storage = angular.copy($storage);
+
+                $rootScope.$watch(function() {
+                    _debounce || (_debounce = setTimeout(function() {
+                        _debounce = null;
+
+                        if (!angular.equals($storage, _last$storage)) {
+                            angular.forEach($storage, function(v, k) {
+                                angular.isDefined(v) && '$' !== k[0] && webStorage.setItem('ngStorage-' + k, angular.toJson(v));
+
+                                delete _last$storage[k];
+                            });
+
+                            for (var k in _last$storage) {
+                                webStorage.removeItem('ngStorage-' + k);
+                            }
+
+                            _last$storage = angular.copy($storage);
+                        }
+                    }, 100));
+                });
+
+                // #6: Use `$window.addEventListener` instead of `angular.element` to avoid the jQuery-specific `event.originalEvent`
+                'localStorage' === storageType && $window.addEventListener && $window.addEventListener('storage', function(event) {
+                    if ('ngStorage-' === event.key.slice(0, 10)) {
+                        event.newValue ? $storage[event.key.slice(10)] = angular.fromJson(event.newValue) : delete $storage[event.key.slice(10)];
+
+                        _last$storage = angular.copy($storage);
+
+                        $rootScope.$apply();
+                    }
+                });
+
+                return $storage;
+            }
+        ];
+    }
+
+})();
+
+},{}],6:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
@@ -32858,7 +32965,7 @@ console.log(loginModule);
 
 angular.module('myApp', [ngRoute, servicesModule, loginModule, registerModule]);
 
-},{"./login":11,"./register":15,"./services":19,"angular":4,"angular-route":2}],6:[function(require,module,exports){
+},{"./login":12,"./register":16,"./services":20,"angular":4,"angular-route":2}],7:[function(require,module,exports){
 
 const htmlTemplate = "<form class=\"form-signin\" ng-submit=\"login()\">\n  <h3 class=\"form-signin-heading\">Please Log in</h3>\n  <div>\n    <label for=\"inputUsername\" >Username</label>\n    <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"UserName...\" required autofocus ng-model=\"user.username\">\n  </div>\n  <div>\n    <label for=\"inputPassword\" >Password</label>\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password...\" required ng-model=\"user.password\">\n  </div>\n  <!-- <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div> -->\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n  <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n</form>\n\n\n<!--   <div ng-controller=\"UserCtrl\">\n      <span ng-show=\"isAuthenticated\">{{welcome}}</span>\n      <form ng-show=\"!isAuthenticated\" ng-submit=\"submit()\">\n        <input ng-model=\"user.name\" type=\"text\" name=\"name\" placeholder=\"User Name\" />\n        <input ng-model=\"user.password\" type=\"password\" name=\"pass\" placeholder=\"Password\" />\n        <input type=\"submit\" value=\"Login\" />\n      </form>\n      <div>{{ error }}</div>\n      <div ng-show=\"isAuthenticated\">\n        <a ng-click=\"callRestricted()\" href=\"\">Shh, this is private!</a>\n        <br>\n        <div ng-show=\"message\">{{ message }}</div>\n        <a ng-click=\"logout()\" href=\"\">Logout</a>\n      </div>\n    </div> -->\n";
 
@@ -32873,7 +32980,7 @@ config.$inject = ['$routeProvider'];
 
 module.exports = config;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 function callRestricted($scope, $http) {
 
   const url = '/api/users';
@@ -32889,7 +32996,7 @@ function callRestricted($scope, $http) {
 
 module.exports = callRestricted;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 const login = require('./login.js');
 const logout = require('./logout.js');
 const callRestricted = require('./callRestricted.js');
@@ -32913,12 +33020,13 @@ loginController.$inject = ['$scope', '$http', '$window'];
 
 module.exports = loginController;
 
-},{"./callRestricted.js":7,"./login.js":9,"./logout.js":10}],9:[function(require,module,exports){
+},{"./callRestricted.js":8,"./login.js":10,"./logout.js":11}],10:[function(require,module,exports){
 const url_base64_decode = require('../utils').url_base64_decode;
 
 function submit($scope, $window, $http) {
 
   $http.post('/api/authenticate', $scope.user).success((data, status, headers, config) => {
+
     $window.sessionStorage.token = data.token;
     $scope.isAuthenticated = true;
     var encodedProfile = data.token.split('.')[1];
@@ -32939,7 +33047,7 @@ function submit($scope, $window, $http) {
 
 module.exports = submit;
 
-},{"../utils":12}],10:[function(require,module,exports){
+},{"../utils":13}],11:[function(require,module,exports){
 function logout($scope, $window) {
 
   $scope.welcome = '';
@@ -32950,18 +33058,19 @@ function logout($scope, $window) {
 
 module.exports = logout;
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
+const ngStorage = require('ng-storage');
 
 const loginController = require('./controller');
 const loginConfig = require('./config');
 
-angular.module('myApp:login', ['ngRoute']).controller('loginController', loginController).config(loginConfig);
+angular.module('myApp:login', ['ngRoute', 'ngStorage']).controller('loginController', loginController).config(loginConfig);
 
 module.exports = 'myApp:login';
 
-},{"./config":6,"./controller":8,"angular":4,"angular-route":2}],12:[function(require,module,exports){
+},{"./config":7,"./controller":9,"angular":4,"angular-route":2,"ng-storage":5}],13:[function(require,module,exports){
 function url_base64_decode(str) {
   var output = str.replace('-', '+').replace('_', '/');
   switch (output.length % 4) {
@@ -32981,7 +33090,7 @@ function url_base64_decode(str) {
 
 module.exports.url_base64_decode = url_base64_decode;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 const htmlTemplate = "<form class=\"form-signin\" ng-submit=\"createUser()\">\n  <h3 class=\"form-signin-heading\">Create a new user</h3>\n  <p><em>Fields with * are mandatory</em></p>\n\n  <div class=\"form-group\" ng-class=\"{ 'has-error': errors.usernameExists }\">\n    <label class=\"control-label\" for=\"inputUsername\" >User name *</label>\n    <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"User Name\" required autofocus ng-model=\"user.username\">\n    <em ng-show=\"errors.usernameExists\" class=\"help-block text-right\">User Name already registered! </br>Please choose another one.</em>\n  </div>\n\n  <div class=\"form-group\" ng-class=\"{ 'has-error': errors.mailExists }\">\n    <label class=\"control-label\" for=\"inputEmail\" >Email address *</label>\n    <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required ng-model=\"user.email\">\n     <em ng-show=\"errors.mailExists\" class=\"help-block text-right\">Mail already registered! </br>Please choose another one.</em>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"inputPassword\" >Password *</label>\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required ng-model=\"user.password\">\n  </div>\n\n  <!-- <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div> -->\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign Up</button>\n  <p class=\"text-right\">Or <strong><a href=\"#/login\">Log in</a></strong> if you already have an an user</p>\n\n <!--  <div class=\"form-group has-success\">\n  <label class=\"control-label\" for=\"inputSuccess\">Input with success</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputSuccess\">\n  <span class=\"help-block\">Woohoo!</span>\n</div>\n<div class=\"form-group has-warning\">\n  <label class=\"control-label\" for=\"inputWarning\">Input with warning</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputWarning\">\n  <span class=\"help-block\">Something may have gone wrong</span>\n</div>\n<div class=\"form-group has-error\">\n  <label class=\"control-label\" for=\"inputError\">Input with error</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputError\">\n  <span class=\"help-block\">Please correct the error</span>\n</div>\n -->\n\n</form>\n\n\n<!--   <div ng-controller=\"UserCtrl\">\n      <span ng-show=\"isAuthenticated\">{{welcome}}</span>\n      <form ng-show=\"!isAuthenticated\" ng-submit=\"submit()\">\n        <input ng-model=\"user.name\" type=\"text\" name=\"name\" placeholder=\"User Name\" />\n        <input ng-model=\"user.password\" type=\"password\" name=\"pass\" placeholder=\"Password\" />\n        <input type=\"submit\" value=\"Login\" />\n      </form>\n      <div>{{ error }}</div>\n      <div ng-show=\"isAuthenticated\">\n        <a ng-click=\"callRestricted()\" href=\"\">Shh, this is private!</a>\n        <br>\n        <div ng-show=\"message\">{{ message }}</div>\n        <a ng-click=\"logout()\" href=\"\">Logout</a>\n      </div>\n    </div> -->\n";
 
@@ -32996,7 +33105,7 @@ config.$inject = ['$routeProvider'];
 
 module.exports = config;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // const submit = require('./submit.js');
 // const logout = require('./logout.js');
 // const callRestricted = require('./callRestricted.js');
@@ -33045,7 +33154,7 @@ registerController.$inject = ['$scope', '$http', '$window'];
 
 module.exports = registerController;
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
@@ -33056,44 +33165,44 @@ angular.module('myApp:register', ['ngRoute']).controller('registerController', r
 
 module.exports = 'myApp:register';
 
-},{"./config":13,"./controller":14,"angular":4,"angular-route":2}],16:[function(require,module,exports){
+},{"./config":14,"./controller":15,"angular":4,"angular-route":2}],17:[function(require,module,exports){
 const request = require('./request.js');
 const responseError = require('./responseError.js');
 
-function authInterceptor($q, $window) {
+function authInterceptor($q, $window, $localStorage) {
   return {
     request: request.bind(null, $window),
     responseError: responseError.bind(null, $q)
   };
 }
 
-authInterceptor.$inject = ['$q', '$window'];
+authInterceptor.$inject = ['$q', '$location', '$localStorage'];
 
 module.exports = authInterceptor;
 
-},{"./request.js":17,"./responseError.js":18}],17:[function(require,module,exports){
-function request($window, config) {
-  config.headers = config.headers || {};
+},{"./request.js":18,"./responseError.js":19}],18:[function(require,module,exports){
+function request($localStorage, config) {
+		config.headers = config.headers || {};
 
-  console.log('%c request...', 'background: yellow; color: #000');
-  console.log($window.sessionStorage);
-  console.log(config);
-  console.log(`%c ${ $window.sessionStorage.token }...`, 'background: red; color: #FFF');
+		// console.log('%c request...', 'background: yellow; color: #000');
+		// console.log($window.sessionStorage);
+		// console.log(config);
+		// console.log(`%c ${$window.sessionStorage.token}...`, 'background: red; color: #FFF');
 
-  if ($window.sessionStorage.token) {
-    config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-  }
-  return config;
+		if ($localStorage.token) {
+				config.headers.Authorization = 'Bearer ' + $$localStorage.token;
+		}
+		return config;
 }
 
 module.exports = request;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 function responseError($q, rejection) {
 
   console.log('%c responseError...', 'background: #222; color: #bada55');
 
-  if (rejection.status === 401) {
+  if (response.status === 401 || response.status === 403) {
     console.log("request rejected!");
     // handle the case where the user is not authenticated
   }
@@ -33102,16 +33211,17 @@ function responseError($q, rejection) {
 
 module.exports = responseError;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 const angular = require('angular');
+const ngStorage = require('ng-storage');
 
 const authInterceptor = require('./authInterceptor');
 
-angular.module('myApp:services', []).factory('authInterceptor', authInterceptor).config(function ($httpProvider, $routeProvider) {
+angular.module('myApp:services', ['ngStorage']).factory('authInterceptor', authInterceptor).config(function ($httpProvider, $routeProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 	$routeProvider.otherwise('/login');
 });
 
 module.exports = 'myApp:services';
 
-},{"./authInterceptor":16,"angular":4}]},{},[5]);
+},{"./authInterceptor":17,"angular":4,"ng-storage":5}]},{},[6]);

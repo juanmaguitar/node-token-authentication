@@ -1,5 +1,3 @@
-'use strict';
-
 const debug = require('debug')('test:models:user');
 var utils = require('../utils');
 var bcrypt = require('bcrypt-as-promised');

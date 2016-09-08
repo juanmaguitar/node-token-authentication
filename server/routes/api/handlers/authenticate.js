@@ -6,16 +6,12 @@ const debug = require('debug')('routes:api:authenticate');
 
 function authenticate(req, res) {
 
-	//console.log(req.body)
-	// find the user
-
-	console.log (req.body)
+	const username = req.body.username;
+	const password = req.body.password;
 
 	User
-		.findOne({ username: req.body.username})
+		.findOne({ username }, "+password")
 		.then( (user) => {
-
-			console.log (user);
 
 			if (!user) {
 
@@ -26,40 +22,28 @@ function authenticate(req, res) {
 
 			} else if (user) {
 
-				user.comparePassword(req.body.password)
-					.then(function(result) {
-						console.log(result)
+				user.comparePassword(password)
+					.then(function( areEqual ) {
+
+						var token = jwt.sign(user, SECRET, {
+							expiresIn: 86400 // expires in 24 hours
+						});
+
+						res.json({
+							success: true,
+							message: 'Enjoy your token!',
+							token: token
+						});
+
 					})
 					.catch(function(err) {
-						console.log(err)
+
+						res.json({
+							success: false,
+							message: 'Authentication failed. Wrong password.'
+						});
+
 					})
-
-				var hashedPass = User.hashPassword(req.body.password);
-				debug(hashedPass)
-				debug(user.password)
-				// check if password matches
-				if (user.password != hashedPass) {
-
-					res.json({
-						success: false,
-						message: 'Authentication failed. Wrong password.'
-					});
-
-				} else {
-
-					debug(SECRET);
-					// if user is found and password is right
-					// create a token
-					var token = jwt.sign(user, SECRET, {
-						expiresIn: 86400 // expires in 24 hours
-					});
-
-					res.json({
-						success: true,
-						message: 'Enjoy your token!',
-						token: token
-					});
-				}
 
 			}
 
