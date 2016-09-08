@@ -5,8 +5,8 @@ const ngStorage = require('ng-storage');
 const loginController = require('./controller')
 const loginConfig = require('./config')
 
-angular.module('myApp:login', ['ngRoute', 'ngStorage'])
+const loginModule = angular.module('myApp:login', ['ngRoute', 'ngStorage'])
 	.controller( 'loginController', loginController )
 	.config( loginConfig )
 
-module.exports = 'myApp:login';
+module.exports = loginModule.name;

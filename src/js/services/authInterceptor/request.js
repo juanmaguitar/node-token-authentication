@@ -9,6 +9,9 @@ function request($localStorage, config) {
 	if ($localStorage.token) {
     config.headers.Authorization = 'Bearer ' + $$localStorage.token;
   }
+  else {
+  	console.log('no token detected...')
+  }
   return config;
 }
 

@@ -25,7 +25,14 @@ function authenticate(req, res) {
 				user.comparePassword(password)
 					.then(function( areEqual ) {
 
-						var token = jwt.sign(user, SECRET, {
+						userPublicData = {
+							name: user.name,
+							username: user.username,
+							email: user.email,
+							roles: user.roles
+						}
+
+						var token = jwt.sign(userPublicData, SECRET, {
 							expiresIn: 86400 // expires in 24 hours
 						});
 

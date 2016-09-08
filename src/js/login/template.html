@@ -1,35 +1,24 @@
-<form class="form-signin" ng-submit="login()">
-  <h3 class="form-signin-heading">Please Log in</h3>
-  <div>
-    <label for="inputUsername" >Username</label>
-    <input type="text" id="inputUsername" class="form-control" placeholder="UserName..." required autofocus ng-model="user.username">
-  </div>
-  <div>
-    <label for="inputPassword" >Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password..." required ng-model="user.password">
-  </div>
-  <!-- <div class="checkbox">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div> -->
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-  <p class="text-right">Or <strong><a href="#/register">Sign up</a></strong> if still don't have an user</p>
-</form>
+<div class="container">
+  <h1 class="text-center">My Super App ⚡️</h1>
 
-
-<!--   <div ng-controller="UserCtrl">
-      <span ng-show="isAuthenticated">{{welcome}}</span>
-      <form ng-show="!isAuthenticated" ng-submit="submit()">
-        <input ng-model="user.name" type="text" name="name" placeholder="User Name" />
-        <input ng-model="user.password" type="password" name="pass" placeholder="Password" />
-        <input type="submit" value="Login" />
-      </form>
-      <div>{{ error }}</div>
-      <div ng-show="isAuthenticated">
-        <a ng-click="callRestricted()" href="">Shh, this is private!</a>
-        <br>
-        <div ng-show="message">{{ message }}</div>
-        <a ng-click="logout()" href="">Logout</a>
-      </div>
+  <form class="form-signin" ng-submit="login()">
+    <h3 class="form-signin-heading">Please Log in</h3>
+    <div>
+      <label for="inputUsername" >Username</label>
+      <input type="text" id="inputUsername" class="form-control" placeholder="UserName..." required autofocus ng-model="user.username">
+    </div>
+    <div>
+      <label for="inputPassword" >Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password..." required ng-model="user.password">
+    </div>
+    <!-- <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
     </div> -->
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    <p class="text-right">Or <strong><a href="#/register">Sign up</a></strong> if still don't have an user</p>
+  </form>
+
+</div>
+

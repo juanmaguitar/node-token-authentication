@@ -1,9 +1,9 @@
-function logout( $scope, $window ) {
+function logout( $scope, $localStorage ) {
 
   $scope.welcome = '';
   $scope.message = '';
   $scope.isAuthenticated = false;
-  delete $window.sessionStorage.token;
+  delete $localStorage.token;
 
 }
 

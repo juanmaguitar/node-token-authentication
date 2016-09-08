@@ -2,7 +2,7 @@ const login = require('./login.js');
 const logout = require('./logout.js');
 const callRestricted = require('./callRestricted.js');
 
-function loginController($scope, $http, $window) {
+function loginController($scope, $http, $localStorage, $location) {
 
   const username = 'juanmaguitar';
   const password = 'juanma100';
@@ -12,12 +12,12 @@ function loginController($scope, $http, $window) {
   $scope.welcome = '';
   $scope.message = '';
 
-  $scope.login = login.bind(null, $scope, $window, $http);
-  $scope.logout = logout.bind(null, $scope, $window);
+  $scope.login = login.bind(null, $scope, $localStorage, $http, $location);
+  $scope.logout = logout.bind(null, $scope, $localStorage);
   $scope.callRestricted = callRestricted.bind(null, $scope, $http);
 
 }
 
-loginController.$inject = ['$scope', '$http', '$window']
+loginController.$inject = ['$scope', '$http', '$localStorage', '$location']
 
 module.exports = loginController;
