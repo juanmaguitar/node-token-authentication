@@ -32860,7 +32860,7 @@ angular.module('myApp', [ngRoute, servicesModule, loginModule, registerModule]);
 
 },{"./login":11,"./register":15,"./services":19,"angular":4,"angular-route":2}],6:[function(require,module,exports){
 
-const htmlTemplate = "<form class=\"form-signin\">\n  <h3 class=\"form-signin-heading\">Please Log in</h3>\n  <div>\n    <label for=\"inputEmail\" >Email address</label>\n    <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required autofocus ng-model=\"user.name\">\n  </div>\n  <div>\n    <label for=\"inputPassword\" >Password</label>\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required>\n  </div>\n  <!-- <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div> -->\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n  <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n</form>\n\n\n<!--   <div ng-controller=\"UserCtrl\">\n      <span ng-show=\"isAuthenticated\">{{welcome}}</span>\n      <form ng-show=\"!isAuthenticated\" ng-submit=\"submit()\">\n        <input ng-model=\"user.name\" type=\"text\" name=\"name\" placeholder=\"User Name\" />\n        <input ng-model=\"user.password\" type=\"password\" name=\"pass\" placeholder=\"Password\" />\n        <input type=\"submit\" value=\"Login\" />\n      </form>\n      <div>{{ error }}</div>\n      <div ng-show=\"isAuthenticated\">\n        <a ng-click=\"callRestricted()\" href=\"\">Shh, this is private!</a>\n        <br>\n        <div ng-show=\"message\">{{ message }}</div>\n        <a ng-click=\"logout()\" href=\"\">Logout</a>\n      </div>\n    </div> -->\n";
+const htmlTemplate = "<form class=\"form-signin\" ng-submit=\"login()\">\n  <h3 class=\"form-signin-heading\">Please Log in</h3>\n  <div>\n    <label for=\"inputUsername\" >Username</label>\n    <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"UserName...\" required autofocus ng-model=\"user.username\">\n  </div>\n  <div>\n    <label for=\"inputPassword\" >Password</label>\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password...\" required ng-model=\"user.password\">\n  </div>\n  <!-- <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div> -->\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n  <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n</form>\n\n\n<!--   <div ng-controller=\"UserCtrl\">\n      <span ng-show=\"isAuthenticated\">{{welcome}}</span>\n      <form ng-show=\"!isAuthenticated\" ng-submit=\"submit()\">\n        <input ng-model=\"user.name\" type=\"text\" name=\"name\" placeholder=\"User Name\" />\n        <input ng-model=\"user.password\" type=\"password\" name=\"pass\" placeholder=\"Password\" />\n        <input type=\"submit\" value=\"Login\" />\n      </form>\n      <div>{{ error }}</div>\n      <div ng-show=\"isAuthenticated\">\n        <a ng-click=\"callRestricted()\" href=\"\">Shh, this is private!</a>\n        <br>\n        <div ng-show=\"message\">{{ message }}</div>\n        <a ng-click=\"logout()\" href=\"\">Logout</a>\n      </div>\n    </div> -->\n";
 
 function config($routeProvider) {
   $routeProvider.when('/login', {
@@ -32890,21 +32890,21 @@ function callRestricted($scope, $http) {
 module.exports = callRestricted;
 
 },{}],8:[function(require,module,exports){
-const submit = require('./submit.js');
+const login = require('./login.js');
 const logout = require('./logout.js');
 const callRestricted = require('./callRestricted.js');
 
 function loginController($scope, $http, $window) {
 
-  const name = 'Nick Cerminara';
-  const password = 'password';
+  const username = 'juanmaguitar';
+  const password = 'juanma100';
 
-  $scope.user = { name, password };
+  $scope.user = { username, password };
   $scope.isAuthenticated = false;
   $scope.welcome = '';
   $scope.message = '';
 
-  $scope.submit = submit.bind(null, $scope, $window, $http);
+  $scope.login = login.bind(null, $scope, $window, $http);
   $scope.logout = logout.bind(null, $scope, $window);
   $scope.callRestricted = callRestricted.bind(null, $scope, $http);
 }
@@ -32913,18 +32913,7 @@ loginController.$inject = ['$scope', '$http', '$window'];
 
 module.exports = loginController;
 
-},{"./callRestricted.js":7,"./logout.js":9,"./submit.js":10}],9:[function(require,module,exports){
-function logout($scope, $window) {
-
-  $scope.welcome = '';
-  $scope.message = '';
-  $scope.isAuthenticated = false;
-  delete $window.sessionStorage.token;
-}
-
-module.exports = logout;
-
-},{}],10:[function(require,module,exports){
+},{"./callRestricted.js":7,"./login.js":9,"./logout.js":10}],9:[function(require,module,exports){
 const url_base64_decode = require('../utils').url_base64_decode;
 
 function submit($scope, $window, $http) {
@@ -32950,7 +32939,18 @@ function submit($scope, $window, $http) {
 
 module.exports = submit;
 
-},{"../utils":12}],11:[function(require,module,exports){
+},{"../utils":12}],10:[function(require,module,exports){
+function logout($scope, $window) {
+
+  $scope.welcome = '';
+  $scope.message = '';
+  $scope.isAuthenticated = false;
+  delete $window.sessionStorage.token;
+}
+
+module.exports = logout;
+
+},{}],11:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
@@ -32983,7 +32983,7 @@ module.exports.url_base64_decode = url_base64_decode;
 
 },{}],13:[function(require,module,exports){
 
-const htmlTemplate = "<form class=\"form-signin\" ng-submit=\"createUser()\">\n  <h3 class=\"form-signin-heading\">Create a new user</h3>\n  <p><em>Fields with * are mandatory</em></p>\n\n  <div class=\"form-group\" ng-class=\"{ 'has-error': errors.usernameExists }\">\n    <label class=\"control-label\" for=\"inputUsername\" >User name *</label>\n    <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"User Name\" required autofocus ng-model=\"user.username\">\n    <em ng-show=\"errors.usernameExists\" class=\"help-block text-right\">User Name already in use! </br>Please choose another one.</em>\n  </div>\n\n  <div class=\"form-group\" ng-class=\"{ 'has-error': errors.mailExists }\">\n    <label class=\"control-label\" for=\"inputEmail\" >Email address *</label>\n    <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required ng-model=\"user.email\">\n     <em ng-show=\"errors.mailExists\" class=\"help-block text-right\">Mail already exists! </br>Please choose another one.</em>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"inputPassword\" >Password *</label>\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required ng-model=\"user.password\">\n  </div>\n\n  <!-- <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div> -->\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign Up</button>\n  <p class=\"text-right\">Or <strong><a href=\"#/login\">Log in</a></strong> if you already have an an user</p>\n\n <!--  <div class=\"form-group has-success\">\n  <label class=\"control-label\" for=\"inputSuccess\">Input with success</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputSuccess\">\n  <span class=\"help-block\">Woohoo!</span>\n</div>\n<div class=\"form-group has-warning\">\n  <label class=\"control-label\" for=\"inputWarning\">Input with warning</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputWarning\">\n  <span class=\"help-block\">Something may have gone wrong</span>\n</div>\n<div class=\"form-group has-error\">\n  <label class=\"control-label\" for=\"inputError\">Input with error</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputError\">\n  <span class=\"help-block\">Please correct the error</span>\n</div>\n -->\n\n</form>\n\n\n<!--   <div ng-controller=\"UserCtrl\">\n      <span ng-show=\"isAuthenticated\">{{welcome}}</span>\n      <form ng-show=\"!isAuthenticated\" ng-submit=\"submit()\">\n        <input ng-model=\"user.name\" type=\"text\" name=\"name\" placeholder=\"User Name\" />\n        <input ng-model=\"user.password\" type=\"password\" name=\"pass\" placeholder=\"Password\" />\n        <input type=\"submit\" value=\"Login\" />\n      </form>\n      <div>{{ error }}</div>\n      <div ng-show=\"isAuthenticated\">\n        <a ng-click=\"callRestricted()\" href=\"\">Shh, this is private!</a>\n        <br>\n        <div ng-show=\"message\">{{ message }}</div>\n        <a ng-click=\"logout()\" href=\"\">Logout</a>\n      </div>\n    </div> -->\n";
+const htmlTemplate = "<form class=\"form-signin\" ng-submit=\"createUser()\">\n  <h3 class=\"form-signin-heading\">Create a new user</h3>\n  <p><em>Fields with * are mandatory</em></p>\n\n  <div class=\"form-group\" ng-class=\"{ 'has-error': errors.usernameExists }\">\n    <label class=\"control-label\" for=\"inputUsername\" >User name *</label>\n    <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"User Name\" required autofocus ng-model=\"user.username\">\n    <em ng-show=\"errors.usernameExists\" class=\"help-block text-right\">User Name already registered! </br>Please choose another one.</em>\n  </div>\n\n  <div class=\"form-group\" ng-class=\"{ 'has-error': errors.mailExists }\">\n    <label class=\"control-label\" for=\"inputEmail\" >Email address *</label>\n    <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required ng-model=\"user.email\">\n     <em ng-show=\"errors.mailExists\" class=\"help-block text-right\">Mail already registered! </br>Please choose another one.</em>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"inputPassword\" >Password *</label>\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required ng-model=\"user.password\">\n  </div>\n\n  <!-- <div class=\"checkbox\">\n    <label>\n      <input type=\"checkbox\" value=\"remember-me\"> Remember me\n    </label>\n  </div> -->\n  <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign Up</button>\n  <p class=\"text-right\">Or <strong><a href=\"#/login\">Log in</a></strong> if you already have an an user</p>\n\n <!--  <div class=\"form-group has-success\">\n  <label class=\"control-label\" for=\"inputSuccess\">Input with success</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputSuccess\">\n  <span class=\"help-block\">Woohoo!</span>\n</div>\n<div class=\"form-group has-warning\">\n  <label class=\"control-label\" for=\"inputWarning\">Input with warning</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputWarning\">\n  <span class=\"help-block\">Something may have gone wrong</span>\n</div>\n<div class=\"form-group has-error\">\n  <label class=\"control-label\" for=\"inputError\">Input with error</label>\n  <input type=\"text\" class=\"form-control\" id=\"inputError\">\n  <span class=\"help-block\">Please correct the error</span>\n</div>\n -->\n\n</form>\n\n\n<!--   <div ng-controller=\"UserCtrl\">\n      <span ng-show=\"isAuthenticated\">{{welcome}}</span>\n      <form ng-show=\"!isAuthenticated\" ng-submit=\"submit()\">\n        <input ng-model=\"user.name\" type=\"text\" name=\"name\" placeholder=\"User Name\" />\n        <input ng-model=\"user.password\" type=\"password\" name=\"pass\" placeholder=\"Password\" />\n        <input type=\"submit\" value=\"Login\" />\n      </form>\n      <div>{{ error }}</div>\n      <div ng-show=\"isAuthenticated\">\n        <a ng-click=\"callRestricted()\" href=\"\">Shh, this is private!</a>\n        <br>\n        <div ng-show=\"message\">{{ message }}</div>\n        <a ng-click=\"logout()\" href=\"\">Logout</a>\n      </div>\n    </div> -->\n";
 
 function config($routeProvider) {
   $routeProvider.when('/register', {
@@ -33000,6 +33000,10 @@ module.exports = config;
 // const submit = require('./submit.js');
 // const logout = require('./logout.js');
 // const callRestricted = require('./callRestricted.js');
+
+const ERR_SOMETHING_DUPLICATED = 0;
+const ERR_USER_DUPLICATED = 1;
+const ERR_MAIL_DUPLICATED = 2;
 
 function registerController($scope, $http, $window) {
 
@@ -33019,8 +33023,8 @@ function registerController($scope, $http, $window) {
       //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
     }).catch(err => {
 
-      $scope.errors.usernameExists = err.data.message == 'User already exist!';
-      $scope.errors.mailExists = err.data.message == 'Mail already exist!';
+      $scope.errors.usernameExists = err.data.code === ERR_USER_DUPLICATED;
+      $scope.errors.mailExists = err.data.code == ERR_MAIL_DUPLICATED;
       console.log(err);
     });
   };
@@ -33070,6 +33074,7 @@ module.exports = authInterceptor;
 },{"./request.js":17,"./responseError.js":18}],17:[function(require,module,exports){
 function request($window, config) {
   config.headers = config.headers || {};
+
   console.log('%c request...', 'background: yellow; color: #000');
   console.log($window.sessionStorage);
   console.log(config);

@@ -1,4 +1,9 @@
 const User = require('server/models')['user'];
+const debug = require('debug')('routes:users:addNewUser');
+
+const ERR_SOMETHING_DUPLICATED = 0;
+const ERR_USER_DUPLICATED = 1;
+const ERR_MAIL_DUPLICATED = 2;
 
 function addNewUser(req, res) {
 
@@ -14,18 +19,18 @@ function addNewUser(req, res) {
 
       console.log(err)
 
+      const success = false;
+      let code = ERR_SOMETHING_DUPLICATED;
+
       if (err.name === 'MongoError' && err.code === 11000) {
         if( (err.message).includes('index: username') ) {
-          msgResponse = { succes: false, message: 'User already exist!' };
+          code = ERR_USER_DUPLICATED;
         }
         else if ( (err.message).includes('index: email') ) {
-          msgResponse = { succes: false, message: 'Mail already exist!' };
+          code = ERR_MAIL_DUPLICATED;
         }
-        else {
-          msgResponse = { succes: false, message: 'Some duplicated data!' };
-        }
-        console.log(msgResponse)
-        return res.status(500).send(msgResponse);
+
+        return res.status(500).send( { success, code });
       }
 
       // Some other error

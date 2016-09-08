@@ -1,5 +1,6 @@
 function request($window, config) {
   config.headers = config.headers || {};
+
 	console.log('%c request...', 'background: yellow; color: #000');
 	console.log($window.sessionStorage);
 	console.log(config);

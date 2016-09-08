@@ -5,13 +5,13 @@
   <div class="form-group" ng-class="{ 'has-error': errors.usernameExists }">
     <label class="control-label" for="inputUsername" >User name *</label>
     <input type="text" id="inputUsername" class="form-control" placeholder="User Name" required autofocus ng-model="user.username">
-    <em ng-show="errors.usernameExists" class="help-block text-right">User Name already in use! </br>Please choose another one.</em>
+    <em ng-show="errors.usernameExists" class="help-block text-right">User Name already registered! </br>Please choose another one.</em>
   </div>
 
   <div class="form-group" ng-class="{ 'has-error': errors.mailExists }">
     <label class="control-label" for="inputEmail" >Email address *</label>
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required ng-model="user.email">
-     <em ng-show="errors.mailExists" class="help-block text-right">Mail already exists! </br>Please choose another one.</em>
+     <em ng-show="errors.mailExists" class="help-block text-right">Mail already registered! </br>Please choose another one.</em>
   </div>
 
   <div class="form-group">

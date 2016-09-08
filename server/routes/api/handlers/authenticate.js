@@ -8,11 +8,14 @@ function authenticate(req, res) {
 
 	//console.log(req.body)
 	// find the user
+
+	console.log (req.body)
+
 	User
-		.findOne({ name: req.body.name})
+		.findOne({ username: req.body.username})
 		.then( (user) => {
 
-			user = user._doc;
+			console.log (user);
 
 			if (!user) {
 
@@ -23,8 +26,19 @@ function authenticate(req, res) {
 
 			} else if (user) {
 
+				user.comparePassword(req.body.password)
+					.then(function(result) {
+						console.log(result)
+					})
+					.catch(function(err) {
+						console.log(err)
+					})
+
+				var hashedPass = User.hashPassword(req.body.password);
+				debug(hashedPass)
+				debug(user.password)
 				// check if password matches
-				if (user.password != req.body.password) {
+				if (user.password != hashedPass) {
 
 					res.json({
 						success: false,

@@ -2,7 +2,7 @@
   "name": "node-token-authentication",
   "main": "server.js",
   "scripts": {
-    "dev": "clear && NODE_PATH=. DEBUG=bin:www nodemon ./ & npm run watch:all",
+    "dev": "clear && NODE_PATH=. DEBUG=schemas:user,test:models:user nodemon ./ & npm run watch:all",
     "start": "node ./",
     "build:css": "node-sass --include-path scss src/scss/main.scss public/main.css",
     "build:js": "browserify src/js/app -o public/bundle.js -t babelify brfs",
@@ -11,7 +11,7 @@
     "watch:js:es2015": "watchify src/js/app -t brfs -t babelify -o public/bundle.js -v",
     "watch:all": "npm run watch:css & npm run watch:js:es2015 & npm run watch:test",
     "test": "NODE_ENV=test NODE_PATH=. mocha test",
-    "watch:test": "NODE_ENV=test NODE_PATH=. DEBUG=schemas:user,test:models:user,services:request nodemon --exec 'clear && npm test'"
+    "watch:test": "NODE_ENV=test NODE_PATH=. nodemon --exec 'clear && npm test'"
   },
   "dependencies": {
     "angular": "^1.5.8",
@@ -27,9 +27,11 @@
     "express-validator": "^2.20.8",
     "jade": "~1.11.0",
     "jsonwebtoken": "^5.7.0",
+    "loading-bar": "0.0.2",
     "mongoose": "^4.5.10",
     "mongoose-unique-validator": "^1.0.2",
     "morgan": "^1.7.0",
+    "ng-storage": "^0.3.2",
     "serve-favicon": "~2.3.0",
     "validator": "^5.5.0"
   },

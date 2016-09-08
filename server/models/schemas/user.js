@@ -4,40 +4,33 @@ const debug = require('debug')('schemas:user');
 
 var Schema = mongoose.Schema;
 
-var BCRYPT_COST = (process.env.NODE_ENV === 'test') ? 1 : 12;
+var BCRYPT_COST = (process.env.NODE_ENV === 'test') ? 1 : 10;
 
 const userSchema = new Schema({
   name: String,
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true, select: false },
-  email: { type: String, required: true, index: true, unique: true },
+  username: { type: String, required: true, index: { unique: true } },
+  password: { type: String, select: false },
+  email: { type: String, required: true, index: { unique: true } },
   roles: Array
 });
 
+console.log(BCRYPT_COST)
+
 userSchema.pre('save', function(next) {
-  const user = this;
 
-  if (!user.isModified('password')) return next();
+  if (!this.isModified('password')) return next();
 
-  bcrypt.hash(user.password, BCRYPT_COST)
+  bcrypt.hash(this.password)
     .then( (hash) => {
-      debug(hash);
-      user.password = hash;
-      next();
+        this.password = hash;
+        next();
     })
 
 });
 
-
-
-userSchema.statics.hashPassword = function (passwordRaw) {
-  debug(`BCRYPT_COST=${BCRYPT_COST}`);
-  return bcrypt.hash(passwordRaw, BCRYPT_COST);
-};
-
-userSchema.statics.comparePasswordAndHash = (password, passwordHash) => {
-  return bcrypt.compare(password, passwordHash);
-};
+userSchema.methods.comparePassword = function(candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+}
 
 userSchema.methods.hasRole = function(role) {
   return this.roles.includes(role);
