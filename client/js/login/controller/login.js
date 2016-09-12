@@ -1,4 +1,4 @@
-const url_base64_decode = require('../utils').url_base64_decode;
+// const url_base64_decode = require('../utils').url_base64_decode;
 
 function submit( $scope, $localStorage, $http, $location ) {
 

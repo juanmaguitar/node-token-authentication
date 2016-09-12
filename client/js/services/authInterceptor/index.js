@@ -1,5 +1,5 @@
-const request = require('./request.js')
-const responseError = require('./responseError.js')
+const request = require('./methods/request.js')
+const responseError = require('./methods/responseError.js')
 
 function authInterceptor($q, $window, $localStorage) {
   return {
