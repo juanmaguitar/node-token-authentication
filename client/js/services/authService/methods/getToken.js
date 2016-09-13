@@ -1,5 +1,5 @@
 function getToken( $localStorage ) {
-	return $localStorage['mean-token']
+	return $localStorage['myApp-token']
 }
 
 module.exports = getToken;
