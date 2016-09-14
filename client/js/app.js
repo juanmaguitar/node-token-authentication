@@ -6,7 +6,8 @@ const registerModule = require('./register');
 const homeModule = require('./home');
 
 const servicesModule = require('./services');
-const appConfig = require('./config.js');
+const appConfig = require('./config/config.js');
+const appRun = require('./config/run.js');
 
 const moduleDependencies = [
 	ngRoute,
@@ -18,3 +19,4 @@ const moduleDependencies = [
 
 angular.module('myApp', moduleDependencies)
 	.config( appConfig )
+	.run( appRun )

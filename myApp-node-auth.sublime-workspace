@@ -1,0 +1,1451 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cdn",
+				"cdn	Bootstrap CSS"
+			],
+			[
+				"iin",
+				"inline-block"
+			],
+			[
+				"set",
+				"setCredentials"
+			],
+			[
+				"if",
+				"if	if"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"flex",
+				"flex-direction"
+			],
+			[
+				"overflow",
+				"overflow-y"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"align",
+				"align-self"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"s",
+				"stretch	(style.css)"
+			],
+			[
+				"fle",
+				"flex-start"
+			],
+			[
+				"space-",
+				"space-between"
+			],
+			[
+				"align-",
+				"align-content"
+			],
+			[
+				"row",
+				"row-reverse"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"fo",
+				"font"
+			],
+			[
+				"jus",
+				"justify-content	(flexbox-notes.md)"
+			],
+			[
+				"spac",
+				"space-between"
+			],
+			[
+				"alig",
+				"align-content"
+			],
+			[
+				"fl",
+				"flex-end"
+			],
+			[
+				"ali",
+				"align-items"
+			],
+			[
+				"ver",
+				"vertical-align"
+			],
+			[
+				"border-",
+				"border-style"
+			],
+			[
+				"shRt",
+				"shRtnTruePassValid	(shRtnTruePassValid.js)"
+			],
+			[
+				"eq",
+				"equal"
+			],
+			[
+				"ex",
+				"expected"
+			],
+			[
+				"assert",
+				"assert.end	(README.md)"
+			],
+			[
+				"core",
+				"core.signup"
+			],
+			[
+				"findW",
+				"findWithCookie	(findWithCookie.js)"
+			],
+			[
+				"lo",
+				"load.sh	(Vagrantfile)"
+			],
+			[
+				"ad",
+				"address.coord"
+			],
+			[
+				"process",
+				"process.argv[2"
+			],
+			[
+				"proces",
+				"process.argv[2"
+			],
+			[
+				"tex",
+				"text"
+			],
+			[
+				"config",
+				"config.json"
+			],
+			[
+				"$rou",
+				"$routeProvider	AngularJS"
+			],
+			[
+				"search",
+				"searchBeers	(getBeers.js)"
+			],
+			[
+				"adre",
+				"address"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"marin",
+				"margin-right"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"col-md-",
+				"col-md-8	(main.css)"
+			],
+			[
+				"_",
+				"_bootstrap.scss"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"strin",
+				"stringify"
+			],
+			[
+				"to",
+				"toArray	.toArray()"
+			],
+			[
+				"getBoo",
+				"getBookmarkById"
+			],
+			[
+				"dele",
+				"deleteBookmark"
+			],
+			[
+				"this",
+				"this._bookmarks"
+			],
+			[
+				"get",
+				"getBookmarks	(BookmarksService.js)"
+			],
+			[
+				"cl",
+				"console.log	(BookmarksService.js)"
+			],
+			[
+				"curre",
+				"currentCategoryName"
+			],
+			[
+				"module",
+				"verbose_module	AngularJS"
+			],
+			[
+				"paddi",
+				"padding"
+			],
+			[
+				"donu",
+				"donuts.json"
+			],
+			[
+				"json",
+				"colors.json"
+			],
+			[
+				"con",
+				"countries.json"
+			],
+			[
+				"app",
+				"appendTo	.appendTo()"
+			],
+			[
+				"pre",
+				"prepend	.prepend()"
+			],
+			[
+				"b",
+				"bottom"
+			],
+			[
+				"data",
+				"data-toggle=\"lightbox"
+			],
+			[
+				"col",
+				"column"
+			],
+			[
+				"spa",
+				"space-between	(style.css)"
+			],
+			[
+				"sp",
+				"space-between	(style.css)"
+			],
+			[
+				"just",
+				"justify-content	(style.css)"
+			],
+			[
+				"comm",
+				"comment-avatar	(index.html)"
+			],
+			[
+				"pan",
+				"panel-heading	(index.html)"
+			],
+			[
+				"list-s",
+				"list-style"
+			],
+			[
+				"bo",
+				"border-box"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"border",
+				"border-color"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"color",
+				"color-projects"
+			],
+			[
+				"li",
+				"list-style"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"n",
+				"none"
+			],
+			[
+				"list-st",
+				"list-style-type"
+			],
+			[
+				"in",
+				"inline-block"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 289.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"packa ins",
+				"Package Control: Install Package"
+			],
+			[
+				"w3c",
+				"W3C Validators: Validate HTML5"
+			],
+			[
+				"format csds",
+				"Format CSS: Expanded (Break Selectors)"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"format",
+				"Format CSS: Expanded (Break Selectors)"
+			],
+			[
+				"list pac",
+				"Package Control: List Packages"
+			],
+			[
+				"packa inst",
+				"Package Control: Install Package"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"codein",
+				"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+			],
+			[
+				"packa ",
+				"Package Control: Install Package"
+			],
+			[
+				"css",
+				"Snippet: PureCSS"
+			],
+			[
+				"css ",
+				"Format CSS: Compressed"
+			],
+			[
+				"beau",
+				"HTMLBeautify"
+			],
+			[
+				"lint",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"ident",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"open ",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"open bor",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"open gist",
+				"Gist: Open Gist"
+			],
+			[
+				"uns",
+				"Unsplash: Insert Image tag"
+			],
+			[
+				"full",
+				"Random:Full Name"
+			],
+			[
+				"random full",
+				"Random:Full Name"
+			],
+			[
+				"snippet table",
+				"Snippet: bs3-table"
+			],
+			[
+				"random",
+				"Random:Text"
+			],
+			[
+				"rand",
+				"Random:Full Name"
+			],
+			[
+				"coomm",
+				"Composer: Edit composer.json"
+			],
+			[
+				"un",
+				"Unsplash: Insert Image tag"
+			],
+			[
+				"rando",
+				"Random:Text"
+			],
+			[
+				"comm",
+				"Toggle Comment"
+			],
+			[
+				"cdn",
+				"Snippet: bst-cdn"
+			],
+			[
+				"boots",
+				"Snippet: Bootstrap CSS"
+			],
+			[
+				"snippet",
+				"Snippet: Angular 2 Subscribe Snippet"
+			],
+			[
+				"snippe",
+				"Snippet: function"
+			],
+			[
+				"bs3",
+				"Snippet: bs3-sm-link-button-danger"
+			],
+			[
+				"jquery",
+				"Snippet: jquery"
+			],
+			[
+				"aweso",
+				"Snippet: Font Awesome"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Google Fonts"
+			],
+			[
+				"gist",
+				"Gist: Open Gist"
+			],
+			[
+				"bs cdn",
+				"Snippet: bs3-cdn"
+			],
+			[
+				"cdn ",
+				"Snippet: bst-cdn-css"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"gist creat",
+				"HaoGist: Create Public Gist"
+			],
+			[
+				"create",
+				"HaoGist: Create Public Gist"
+			],
+			[
+				"create gist",
+				"HaoGist: Create Public Gist"
+			],
+			[
+				"gist open",
+				"HaoGist: Open Gist From Cache"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"hao",
+				"HaoGist: Open Gist From Server"
+			],
+			[
+				"xiki",
+				"Create Xiki Buffer"
+			],
+			[
+				"omm",
+				"Random:E-mail"
+			],
+			[
+				"rand full",
+				"Random:Full Name"
+			],
+			[
+				"bootstrap",
+				"Snippet: Bootstrap JS"
+			],
+			[
+				"vomm",
+				"View: Toggle Minimap"
+			],
+			[
+				"com",
+				"Toggle Comment"
+			],
+			[
+				"random	",
+				"Random:Text"
+			],
+			[
+				"rando	",
+				"Random:Text"
+			],
+			[
+				"ran full",
+				"Random:Full Name"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"previ",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"esli",
+				"ESLint"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"js pre",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"beauti",
+				"HTMLBeautify"
+			],
+			[
+				"prett",
+				"Pretty JSON: Validate"
+			],
+			[
+				"cmm",
+				"Toggle Comment"
+			],
+			[
+				"lis pa",
+				"Package Control: List Packages"
+			],
+			[
+				"pre",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"prev",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"cpmm",
+				"Composer: Dump Autoload"
+			],
+			[
+				"rand te",
+				"Random:Text"
+			],
+			[
+				"full nam",
+				"Random:Full Name"
+			],
+			[
+				"ran fu",
+				"Random:Full Name"
+			],
+			[
+				"text",
+				"Random:Text"
+			],
+			[
+				"html",
+				"HTMLBeautify"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"cd",
+				"Cdnjs: Import Script"
+			],
+			[
+				"cdnjs",
+				"Cdnjs: Search"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"forma",
+				"Format: Javascript"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"rand ",
+				"Random:First Name"
+			],
+			[
+				"ran te",
+				"Random:Text"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"ins pack",
+				"Package Control: Install Package"
+			],
+			[
+				"rand text",
+				"Random:Text"
+			],
+			[
+				"ran",
+				"Random:Text"
+			],
+			[
+				"for",
+				"Format: Javascript"
+			],
+			[
+				"form",
+				"Format: Javascript"
+			],
+			[
+				"pretti",
+				"HTMLPrettify"
+			],
+			[
+				"bea",
+				"Javascript Beautify"
+			],
+			[
+				"fo",
+				"Format: Javascript"
+			],
+			[
+				"beaut",
+				"Javascript Beautify"
+			],
+			[
+				"preview",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"previe",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"book",
+				"Bookmarks: Select Next"
+			],
+			[
+				"boo",
+				"Bookmarks: Select Next"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"java",
+				"Javascript Beautify"
+			],
+			[
+				"html ",
+				"HTMLBeautify"
+			],
+			[
+				"random ad",
+				"Random:IPv4 Address"
+			],
+			[
+				"angula",
+				"Snippet: Angular.js"
+			],
+			[
+				"comment",
+				"Toggle Comment"
+			],
+			[
+				"commen",
+				"Toggle Comment"
+			],
+			[
+				"rand ad",
+				"Random:Letters and numbers"
+			],
+			[
+				"random name",
+				"Random:Last Name"
+			],
+			[
+				"comme",
+				"Toggle Comment"
+			],
+			[
+				"rando ful",
+				"Random:Full Name"
+			],
+			[
+				"preiv",
+				"Emmet: Previous Edit Point"
+			],
+			[
+				"bookm",
+				"Bookmarks: Select Next"
+			],
+			[
+				"ra",
+				"Random:First Name"
+			],
+			[
+				"inst pa",
+				"Package Control: Install Package"
+			],
+			[
+				"rand	ful",
+				"Random:Full Name"
+			],
+			[
+				"rand ful",
+				"Random:Full Name"
+			],
+			[
+				"rand fu",
+				"Random:Full Name"
+			],
+			[
+				"ra te",
+				"Random:Text"
+			],
+			[
+				"ran ful",
+				"Random:Full Name"
+			],
+			[
+				"random ",
+				"Random:Word"
+			],
+			[
+				"random tex",
+				"Random:Text"
+			],
+			[
+				"rpevi",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"pevi",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"PREVI",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"stack",
+				"Package Control: Install Package"
+			],
+			[
+				"MARK",
+				"MarkdownEditing: New Inline Link"
+			],
+			[
+				"snipp",
+				"Snippet: jquery"
+			],
+			[
+				"revie",
+				"Markdown Preview: Preview in Browser"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 181.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/JuanMa/www/node-token-authentication",
+		"/Users/JuanMa/www/node-token-authentication/client",
+		"/Users/JuanMa/www/node-token-authentication/client/js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/config",
+		"/Users/JuanMa/www/node-token-authentication/client/js/home",
+		"/Users/JuanMa/www/node-token-authentication/client/js/home/controller",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi/app_client",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi/app_client/common",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi/app_client/common/config",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi/app_client/common/services",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi/app_client/views",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi/app_client/views/login"
+	],
+	"file_history":
+	[
+		"/Users/JuanMa/www/node-token-authentication/client/js/app.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/index.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods/getToken.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/home/template.html",
+		"/Users/JuanMa/www/node-token-authentication/client/js/config/config.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/config/run.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods/isLoggedIn.js",
+		"/Users/JuanMa/www/node-token-authentication/project.TODO",
+		"/Users/JuanMa/www/node-token-authentication/.gitignore",
+		"/Users/JuanMa/www/node-token-authentication/index.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods/logout.js",
+		"/Users/JuanMa/www/node-token-authentication/myApp-node-auth.sublime-project",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi/app_client/common/services/authentication.service.js",
+		"/Users/JuanMa/Desktop/Sep2016/temp/sipedi/app_client/common/services/main.service.js",
+		"/Users/JuanMa/Desktop/Sep2016/ci-sep2016-temp/test-colaborative/public/index.html",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/PlainTasks/messages/Tutorial.todo",
+		"/Users/JuanMa/Desktop/Sep2016/ci-sep2016-temp/test-colaborative/public/main.js",
+		"/Users/JuanMa/Desktop/Sep2016/ci-sep2016-temp/test-colaborative/public/module.js",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/Base File.sublime-settings",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/DocBlockr/Base File.sublime-settings",
+		"/Users/JuanMa/Desktop/Sep2016/ci-sep2016-temp/test-colaborative/terminal.glue",
+		"/Users/JuanMa/Desktop/Sep2016/ci-sep2016-temp/test-colaborative/public/terminal.glue",
+		"/Users/JuanMa/Desktop/Sep2016/ci-sep2016-temp/test-colaborative/Gruntfile.js",
+		"/var/folders/zx/mhc4d_4559vdb9fy3q_mqc4c0000gn/T/gistfile1.textile",
+		"/Users/JuanMa/Desktop/Sep2016/ci-sep2016-temp/test-colaborative/src/style.css",
+		"/Users/JuanMa/www/node-token-authentication/client/js/login/controller/login.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods/saveToken.js",
+		"/Users/JuanMa/Desktop/temp/sipedi/app_client/common/services/authentication.service.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods/setCredentials.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods/login.js",
+		"/Users/JuanMa/Desktop/ci-sep2016-temp/snippets-sublime/index.html",
+		"/Users/JuanMa/Desktop/ci-sep2016-temp/snippets-sublime/main.js",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/open-in-chrome.sublime-build",
+		"/var/folders/zx/mhc4d_4559vdb9fy3q_mqc4c0000gn/T/gistfile1.txt",
+		"/Users/JuanMa/www/stream1_frontend_sep2016/src/md/index.md",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/Gist.sublime-settings",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/HaoGist.sublime-settings",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/HaoGist/JS: curl post github data",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/HaoGist/fibonacciNth.js",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/HaoGist/1_ruby_quicksort.rb",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/HaoGist/3_cheesecake_recipe.md",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/HaoGist/0_reuse_code.js",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/HaoGist/2_keyboard_shortcuts.md",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/HaoGist/functions.php",
+		"/Users/JuanMa/Desktop/projects-temp/dummy-test/index.html",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/authService/methods/getToken.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/authService/methods/login.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/authService/methods/saveToken.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/authService/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/authInterceptor/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/authService/methods/logout.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/app.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/login/controller/login.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/register/controller/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/authInterceptor/request.js",
+		"/Users/JuanMa/www/node-token-authentication/package.json",
+		"/Users/JuanMa/Desktop/temp/sipedi/app_client/app.js",
+		"/Users/JuanMa/www/video-background-demo/public/index.html",
+		"/Users/JuanMa/www/video-background-demo/package.json",
+		"/Users/JuanMa/www/video-background-demo/src/style.css",
+		"/Users/JuanMa/www/video-background-demo/public/style.css",
+		"/Users/JuanMa/www/video-background-demo/style.css",
+		"/Users/JuanMa/www/flexbox_course/src/style.css",
+		"/Users/JuanMa/www/flexbox_course/public/style.css",
+		"/Users/JuanMa/www/flexbox_course/Gruntfile.js",
+		"/Users/JuanMa/www/flexbox_course/public/index.html",
+		"/Users/JuanMa/www/flexbox_course/.bowerrc",
+		"/Users/JuanMa/Desktop/ci-sep2016-temp/flexbox-demo/public/index.html",
+		"/Users/JuanMa/www/flexbox_course/build/style.css",
+		"/Users/JuanMa/www/flexbox_course/dist/index.html",
+		"/Users/JuanMa/www/flexbox_course/index.html",
+		"/Users/JuanMa/www/flexbox_course/style.css",
+		"/Users/JuanMa/www/node-token-authentication/src/js/login/controller/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/login/controller/logout.js",
+		"/Users/JuanMa/Desktop/ci-sep2016-temp/bootstrap-home/index.html",
+		"/Users/JuanMa/www/node-token-authentication/src/js/register/template.html",
+		"/Users/JuanMa/www/node-token-authentication/src/js/login/template.html",
+		"/Users/JuanMa/www/node-token-authentication/public/index.html",
+		"/Users/JuanMa/www/node-token-authentication/src/scss/_home.scss",
+		"/Users/JuanMa/www/node-token-authentication/src/js/register/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/login/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/home/template.html",
+		"/Users/JuanMa/www/node-token-authentication/src/js/home/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/home/config.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/register/config.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/config.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/home/controller/index.js",
+		"/Users/JuanMa/www/node-token-authentication/src/scss/_home.scs",
+		"/Users/JuanMa/www/node-token-authentication/src/js/services/authInterceptor/responseError.js",
+		"/Users/JuanMa/www/node-token-authentication/test/models/user.js",
+		"/Users/JuanMa/www/node-token-authentication/server/models/schemas/user.js",
+		"/Users/JuanMa/www/node-token-authentication/server/routes/api/handlers/authenticate.js",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/JuanMa/www/node-token-authentication/test/utils.js",
+		"/Users/JuanMa/www/node-token-authentication/server/models/index.js",
+		"/Users/JuanMa/www/flexbox_course/solutions/intro/style.css",
+		"/Users/JuanMa/Desktop/flexbox-notes.md",
+		"/Users/JuanMa/www/flexbox_course/solutions/intro/index.html",
+		"/Users/JuanMa/www/flexbox_course/.gitignore",
+		"/Users/JuanMa/Desktop/ci-sep2016-temp/flexbox-example/index.html",
+		"/Users/JuanMa/Desktop/ci-sep2016-temp/css-test-project/more-styles.css",
+		"/Users/JuanMa/Desktop/ci-sep2016-temp/css-test-project/styles.css",
+		"/Users/JuanMa/www/node-token-authentication/server/routes/root/handlers/addNewUser.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/login/config.js",
+		"/Users/JuanMa/www/node-token-authentication/src/js/register/controller/submit.js",
+		"/Users/JuanMa/Downloads/index (2).html",
+		"/Users/JuanMa/www/stream1_frontend_sep2016-/package.json",
+		"/Users/JuanMa/www/stream1_frontend_sep2016-/src/md/index.md",
+		"/Users/JuanMa/www/stream1_frontend_sep2016-/Gruntfile.js",
+		"/Users/JuanMa/www/stream1_frontend_sep2016-/README.md",
+		"/Users/JuanMa/www/stream1_frontend_sep2016-/www/index.html",
+		"/Users/JuanMa/.bashrc",
+		"/Users/JuanMa/.profile",
+		"/Users/JuanMa/www/angular-browserify-example/package.json",
+		"/Users/JuanMa/www/node-token-authentication/src/js/config/index.js",
+		"/Users/JuanMa/www/node-token-authentication/README.md",
+		"/Users/JuanMa/www/do-we-need-tdd-blended/README.md",
+		"/Users/JuanMa/www/node-token-authentication/bin/www/index.js",
+		"/Users/JuanMa/www/node-token-authentication/public/main.css",
+		"/Users/JuanMa/www/node-token-authentication/src/scss/main.scss",
+		"/Users/JuanMa/www/node-token-authentication/src/scss/_custom.scss",
+		"/Users/JuanMa/www/node-token-authentication/client/src/scss/main.scss",
+		"/Users/JuanMa/www/node-token-authentication/client/src/scss/_custom.scs",
+		"/Users/JuanMa/www/node-token-authentication/client/src/js/app.js",
+		"/Users/JuanMa/www/node-token-authentication/node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss",
+		"/Users/JuanMa/www/node-token-authentication/client/src/scss/main.scs",
+		"/Users/JuanMa/www/node-token-authentication/server/routes/root/handlers/setup.js"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 111.0,
+		"where_history":
+		[
+			"/Users/JuanMa/Desktop/Sep2016/temp/sipedi",
+			"/Users/JuanMa/Desktop/temp/sipedi/app_client",
+			"/Users/JuanMa/www/node-token-authentication/src/js/login/controller",
+			"/Users/JuanMa/www/node-token-authentication/src",
+			"/Users/JuanMa/www/stream1_frontend_sep2016-",
+			"/Users/JuanMa/www/node-token-authentication,-node_modules/**/*",
+			"/Users/JuanMa/www/node-token-authentication",
+			"/Users/JuanMa/www/node-token-authentication/test",
+			"/Users/JuanMa/www/node-token-authentication/server",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/definition",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/woothemes-sensei",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/definition",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/definition, *.php",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/definition",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/definition, *.php",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/definition",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/woothemes-sensei",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/definition",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/woothemes-sensei",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/definition",
+			"/Users/JuanMa/www/brewery-db-proxy",
+			"/Users/JuanMa/www/firebase-products-jquery",
+			"/Users/JuanMa/www/firebase-auth/js",
+			"/Users/JuanMa/www/angular-spotify-app",
+			"/Users/JuanMa/www/angular-express-webpack-boilerplate",
+			"/Users/JuanMa/www/edx-mean-stack/4-angular/homework/node_modules/bootstrap",
+			"/Users/JuanMa/www/edx-mean-stack/4-angular/server_juanma/app",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework,-*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework,-*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework/test",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework,-*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework,-*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework,-*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework,-*/node_modules/*auth",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/homework,-*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack,-*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/examples,-*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/examples -*/node_modules/*",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/examples -node_modules",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/examples",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/examples/8-examples/my-version/app",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/examples/5-examples/my-version",
+			"/Users/JuanMa/www/edx-mean-stack/3-node-rest-api-express/examples/5-examples/my-version/app",
+			"/Users/JuanMa/www/edx-mean-stack/1-intro-mongodb-node/homework",
+			"/Users/JuanMa/www/angular-bookmarks/src",
+			"/Users/JuanMa/www/angular-bookmarks/src/app",
+			"/Users/JuanMa/www/angular-bookmarks/src",
+			"/Users/JuanMa/www/angular-bookmarks/src/app",
+			"/Users/JuanMa/www/angular-bookmarks/src",
+			"/Users/JuanMa/www/angular-bookmarks/src/app",
+			"/Users/JuanMa/www/angular-bookmarks/src",
+			"/Users/JuanMa/www/angular-bookmarks/src/app",
+			"/Users/JuanMa/www/angular-bookmarks/src",
+			"/Users/JuanMa/www/movies-web",
+			"/Users/JuanMa/Desktop/surfmocion-escuelas/js",
+			"/Users/JuanMa/www/pixelovers-test-staging",
+			"/Users/JuanMa/www/pixelovers-test-staging/wp-content/plugins",
+			"/Users/JuanMa/www/pixelovers-test-staging/wp-content/themes",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/adnseguros.es",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/off-the-shelf",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis/roles/letsencrypt",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis",
+			"/Users/JuanMa/www/juanmaguitar.com/site/config",
+			"/Users/JuanMa/www/juanmaguitar.com/site",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/wordpress-mu-domain-mapping",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/sharepress",
+			"/Users/JuanMa/www/juanmaguitar.com/site",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/wordpress-mu-domain-mapping",
+			"/Users/JuanMa/www/juanmaguitar.com/site",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/facebook-auto-publish",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/themes/lasrecetasdeguada.com",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/carousel-without-jetpack",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/carousel-without-jetpack",
+			"/Users/JuanMa/www/juanmaguitar.com/site/web/app/plugins/easy-image-gallery",
+			"/Users/JuanMa/www/juanmaguitar.com",
+			"/Users/JuanMa/www/juanmaguitar.com/site",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis/roles/deploy",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis/roles",
+			"/Users/JuanMa/www/juanmaguitar.com",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis/roles",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis/roles/deploy",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis/roles",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis/roles/deploy",
+			"/Users/JuanMa/www/juanmaguitar.com/trellis/roles/deploy/hooks",
+			"/Users/JuanMa/www/juanmaguitar.com",
+			"/Users/JuanMa/www/juanma-blogs.com",
+			"/Users/JuanMa/www/myexample.com",
+			"/Users/JuanMa/www/myexample.com/trellis/roles/wordpress-setup",
+			"/Users/JuanMa/www/myexample.com",
+			"/Users/JuanMa/www/my-example.com/trellis",
+			"/Users/JuanMa/www/juanma-blogs.com",
+			"/Users/JuanMa/www/my-example.com",
+			"/Users/JuanMa/www/my-example.com/my-site",
+			"/Users/JuanMa/www/my-example.com/trellis",
+			"/Users/JuanMa/www/tests-multisite.com/site",
+			"/Users/JuanMa/www/juanma-blogs.com/jmblogs",
+			"/Users/JuanMa/www/juanma-blogs.com/trellis",
+			"/Users/JuanMa/www/juanma-blogs.com/trellis/roles",
+			"/Users/JuanMa/www/juanma-blogs.com/trellis",
+			"/Users/JuanMa/www/juanma-blogs.com",
+			"/Users/JuanMa/www/juanma-blogs.com/trellis",
+			"/Users/JuanMa/www/juanma-blogs.com",
+			"/Users/JuanMa/www/juanma-blogs.com/trellis",
+			"/Users/JuanMa/www/juanma-blogs.com/jmblogs",
+			"/Users/JuanMa/www/juanma-blogs.com",
+			"/Users/JuanMa/www/juanma-blogs.com/jmblogs",
+			"/Users/JuanMa/www/juanma-blogs.com/trellis",
+			"/Users/JuanMa/www/juanma-blogs.com/jmblogs/web/app/plugins/wordpress-importer",
+			"/Users/JuanMa/www/juanma-blogs.com/jmblogs",
+			"/Users/JuanMa/www/juanma-blogs.com",
+			"/Users/JuanMa/www/roots-example-project.com",
+			"/Users/JuanMa/www/membership",
+			"/Users/JuanMa/www/roots-example-project.com/trellis/group_vars",
+			"/Users/JuanMa/www/roots-example-project.com",
+			"/Users/JuanMa/www/roots-example-project.com/site",
+			"/Users/JuanMa/www/example.com/trellis",
+			"/Users/JuanMa/www/tuescuelademusica-sensei/vagrant",
+			"/Users/JuanMa/www/javascript-notes/markdown-en"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"getToken",
+			"descrip",
+			"lorem",
+			"class=\"sr-only\" ",
+			"href=\"\"",
+			"setCredentials",
+			"currentUser",
+			"_doc.",
+			"email",
+			"setCredentials",
+			"saveToken",
+			"credentials",
+			"div",
+			"balsa",
+			"'),",
+			" ",
+			"angular-jwt",
+			"jwtHelper",
+			"prepareProductsData",
+			"a href=\"#\"",
+			"255",
+			"build",
+			"10",
+			"window",
+			"bcrypt",
+			"createdUser",
+			"SALT_WORK_FACTOR",
+			"<p>box",
+			"p",
+			"plate",
+			"div",
+			"console.log",
+			"window.sessionStorage.token",
+			"$window.sessionStorage.token",
+			"var",
+			"http://code-institute-org.github.io/stream1_frontend_Sep2016",
+			"sep2016",
+			"seb2016",
+			"feb2016",
+			"may2016",
+			"”",
+			"“",
+			"client/",
+			"models/User",
+			"../../../models/User",
+			"secret",
+			"this.user",
+			"shRtnTrueUserHasRole",
+			"registering",
+			"console",
+			"API",
+			"restful",
+			"angular",
+			"authen",
+			"var",
+			"app",
+			"public",
+			"debug",
+			"var",
+			"let",
+			"tap",
+			"tape",
+			"'",
+			"semantic-release",
+			"movies",
+			"\"",
+			"API",
+			"NPM",
+			"Auth",
+			"api",
+			"login",
+			"1.0.2",
+			"loops",
+			"current-menu-item",
+			"Sensei_Templates",
+			"sensei_get_template_part",
+			"course-container",
+			"get_template_part",
+			"testimon",
+			"is_home",
+			"home.php",
+			"woothemes_add_javascript",
+			"jquery.flexslider-min",
+			"featured-slider",
+			"slider",
+			"style",
+			"styles",
+			"slider",
+			"featured-slider",
+			"slider",
+			"sensei-course-meta",
+			"Sensei()",
+			"settings",
+			"sensei-course-meta",
+			"featured-slider.php",
+			"slider",
+			"sensei-course-filters",
+			"size",
+			"2161",
+			"frontendScriptsAndCSS",
+			"stule",
+			"scholar",
+			"adnseguros.es",
+			"trabajarenremoto",
+			"debug",
+			"getProjection",
+			"removeTask",
+			"addTask",
+			"getCompletedTasks",
+			"getPendingTasks",
+			"routerTasks",
+			"byId",
+			"webpack",
+			".cmd",
+			"h1",
+			"myController",
+			"myControlller",
+			"case",
+			"oddEvenFormat",
+			"showConsole",
+			"request",
+			"line",
+			"myCoolMachine",
+			"server",
+			"strStreamComplete",
+			"streamComplete",
+			"body",
+			"strChunkData"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"Sep2016",
+			"sep2016",
+			"staging1.pixelovers-test.com",
+			"Searching",
+			"parentheses"
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 33.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 166.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.gist_log":
+	{
+		"height": 278.0
+	},
+	"pinned_build_system": "Packages/User/open-in-chrome.sublime-build",
+	"project": "myApp-node-auth.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"front-page",
+				"site/web/app/themes/tribute/front-page.php"
+			],
+			[
+				"home.php",
+				"site/web/app/themes/off-the-shelf/home.php"
+			],
+			[
+				"",
+				"site/.env.example"
+			],
+			[
+				"nginx.conf.j2",
+				"trellis/roles/nginx/templates/nginx.conf.j2"
+			],
+			[
+				"htaccess",
+				"jmblogs/web/.htaccess"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 313.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,5 +1,6 @@
 function logout() {
-	$window.localStorage.removeItem( 'mean-token' );
-	$location.path( '/' );
-	console.log( 'logout bye...' )
+	$window.localStorage.removeItem('myApp-token');
+	$location.path( '/login' );
 }
+
+module.exports = logout;

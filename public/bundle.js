@@ -7,24 +7,58 @@ const registerModule = require('./register');
 const homeModule = require('./home');
 
 const servicesModule = require('./services');
-const appConfig = require('./config.js');
+const appConfig = require('./config/config.js');
+const appRun = require('./config/run.js');
 
 const moduleDependencies = [ngRoute, servicesModule, loginModule, registerModule, homeModule];
 
-angular.module('myApp', moduleDependencies).config(appConfig);
+angular.module('myApp', moduleDependencies).config(appConfig).run(appRun);
 
-},{"./config.js":2,"./home":5,"./login":11,"./register":14,"./services":23,"angular":29,"angular-route":27}],2:[function(require,module,exports){
+},{"./config/config.js":2,"./config/run.js":3,"./home":6,"./login":12,"./register":15,"./services":24,"angular":30,"angular-route":28}],2:[function(require,module,exports){
 function config($httpProvider, $routeProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
-	$routeProvider.otherwise('/login');
 };
 
 config.$inject = ['$httpProvider', '$routeProvider'];
 module.exports = config;
 
 },{}],3:[function(require,module,exports){
+function run($rootScope, $location, authService) {
 
-const htmlTemplate = "<style>\n  body {\n    min-height: 2000px;\n    padding-top: 70px;\n  }\n</style>\n\n<!-- Fixed navbar -->\n<nav class=\"navbar navbar-default navbar-fixed-top\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">Project name</a>\n    </div>\n    <div id=\"navbar\" class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"active\"><a href=\"#\">Home</a></li>\n        <li><a href=\"#about\">About</a></li>\n        <li><a href=\"#contact\">Contact</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li class=\"dropdown-header\">Nav header</li>\n            <li><a href=\"#\">Separated link</a></li>\n            <li><a href=\"#\">One more separated link</a></li>\n          </ul>\n        </li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"../navbar/\">Default</a></li>\n        <li><a href=\"../navbar-static-top/\">Static top</a></li>\n        <li class=\"active\"><a href=\"./\">Fixed top <span class=\"sr-only\">(current)</span></a></li>\n      </ul>\n    </div><!--/.nav-collapse -->\n  </div>\n</nav>\n\n<div class=\"container\">\n\n  <!-- Main component for a primary marketing message or call to action -->\n  <div class=\"jumbotron\">\n    <h1>Navbar example</h1>\n    <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>\n    <p>To see the difference between static and fixed top navbars, just scroll.</p>\n    <p>\n      <a class=\"btn btn-lg btn-primary\" href=\"../../components/#navbar\" role=\"button\">View navbar docs &raquo;</a>\n    </p>\n  </div>\n\n</div> <!-- /container -->";
+	const redirectIfLogged = () => {
+
+		const isLogged = authService.isLoggedIn();
+
+		console.log('isLogged?');
+		console.log(isLogged);
+
+		if (!authService.isLoggedIn()) {
+			$location.path('login');
+		} else {
+			console.log("you're logged!!...");
+		}
+	};
+
+	console.log("---->>>> run....");
+	if ($location.path() !== 'login') {
+		redirectIfLogged();
+	}
+
+	$rootScope.$on('$routeChangeStart', function (event, nextRoute, currentRoute) {
+		console.log("---->>>> $routeChangeStart");
+		console.log(event);
+		console.log(nextRoute);
+		console.log(currentRoute);
+		redirectIfLogged();
+	});
+}
+
+run.$inject = ['$rootScope', '$location', 'authService'];
+module.exports = run;
+
+},{}],4:[function(require,module,exports){
+
+const htmlTemplate = "<style>\n  body {\n    padding: 0;\n  }\n  .navbar {\n    margin-bottom: 0;\n  }\n  .navbar-nav li {\n    border:1px solid red;\n    display: inline-block;\n  }\n  header {\n    background: #000;\n  }\n  header a {\n    color: white;\n  }\n  .navbar-brand a:hover {\n    color: white;\n    text-decoration: underline;\n  }\n  .navbar > * {\n    display: inline-block;\n    margin-bottom: 0;\n  }\n</style>\n\n<header>\n  <div class=\"container\">\n\n    <div class=\"navbar\">\n\n        <p class=\"navbar-brand\"><a href=\"#\">My Awesome Project</a> 😎</p>\n        <ul class=\"nav navbar-nav\">\n          <li class=\"active\">\n            <a href=\"#\">Logged as {{ $parent.loggedUser.username }}</a>\n          </li>\n          <li>\n            <a href=\"#\"><strong>Logout</strong></a>\n          </li>\n        </ul>\n\n    </div>\n\n  </div>\n</header>\n\n\n<div class=\"container\">\n\n  <!-- Main component for a primary marketing message or call to action -->\n  <div class=\"jumbotron\">\n    <h1>Navbar example</h1>\n    <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>\n    <p>To see the difference between static and fixed top navbars, just scroll.</p>\n    <p>\n      <a class=\"btn btn-lg btn-primary\" href=\"../../components/#navbar\" role=\"button\">View navbar docs &raquo;</a>\n    </p>\n  </div>\n\n</div> <!-- /container -->";
 
 function config($routeProvider) {
   $routeProvider.when('/home', {
@@ -37,7 +71,7 @@ config.$inject = ['$routeProvider'];
 
 module.exports = config;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 function homeController($scope) {
 
   const username = 'juanmaguitar';
@@ -50,7 +84,7 @@ homeController.$inject = ['$scope'];
 
 module.exports = homeController;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
@@ -61,7 +95,7 @@ const homeModule = angular.module('myApp:home', ['ngRoute']).controller('homeCon
 
 module.exports = homeModule.name;
 
-},{"./config":3,"./controller":4,"angular":29,"angular-route":27}],6:[function(require,module,exports){
+},{"./config":4,"./controller":5,"angular":30,"angular-route":28}],7:[function(require,module,exports){
 
 const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n  <form class=\"form-signin\" ng-submit=\"login()\">\n    <h3 class=\"form-signin-heading\">Please Log in</h3>\n    <div>\n      <label for=\"inputUsername\" >Username</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"UserName...\" required autofocus ng-model=\"user.username\">\n    </div>\n    <div>\n      <label for=\"inputPassword\" >Password</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password...\" required ng-model=\"user.password\">\n    </div>\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n  </form>\n\n</div>\n\n";
 
@@ -76,7 +110,7 @@ config.$inject = ['$routeProvider'];
 
 module.exports = config;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 function callRestricted($scope, $http) {
 
   const url = '/api/users';
@@ -92,7 +126,7 @@ function callRestricted($scope, $http) {
 
 module.exports = callRestricted;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 const login = require('./login.js');
 const logout = require('./logout.js');
 const callRestricted = require('./callRestricted.js');
@@ -117,7 +151,7 @@ loginController.$inject = ['$scope', '$http', '$localStorage', '$location', 'aut
 
 module.exports = loginController;
 
-},{"./callRestricted.js":7,"./login.js":9,"./logout.js":10}],9:[function(require,module,exports){
+},{"./callRestricted.js":8,"./login.js":10,"./logout.js":11}],10:[function(require,module,exports){
 // const url_base64_decode = require('../utils').url_base64_decode;
 
 function submit($scope, authService, $localStorage, $http, $location) {
@@ -151,7 +185,7 @@ function submit($scope, authService, $localStorage, $http, $location) {
 
 module.exports = submit;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 function logout($scope, $localStorage) {
 
   $scope.welcome = '';
@@ -162,7 +196,7 @@ function logout($scope, $localStorage) {
 
 module.exports = logout;
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
 const ngStorage = require('ng-storage');
@@ -174,7 +208,7 @@ const loginModule = angular.module('myApp:login', ['ngRoute', 'ngStorage']).cont
 
 module.exports = loginModule.name;
 
-},{"./config":6,"./controller":8,"angular":29,"angular-route":27,"ng-storage":30}],12:[function(require,module,exports){
+},{"./config":7,"./controller":9,"angular":30,"angular-route":28,"ng-storage":31}],13:[function(require,module,exports){
 
 const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n  <form class=\"form-signin\" ng-submit=\"createUser()\">\n    <h3 class=\"form-signin-heading\">Create a new user</h3>\n    <p><em>Fields with * are mandatory</em></p>\n\n    <div class=\"form-group\" ng-class=\"{ 'has-error': errors.usernameExists }\">\n      <label class=\"control-label\" for=\"inputUsername\" >User name *</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"User Name\" required autofocus ng-model=\"user.username\">\n      <em ng-show=\"errors.usernameExists\" class=\"help-block text-right\">User Name already registered! </br>Please choose another one.</em>\n    </div>\n\n    <div class=\"form-group\" ng-class=\"{ 'has-error': errors.mailExists }\">\n      <label class=\"control-label\" for=\"inputEmail\" >Email address *</label>\n      <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required ng-model=\"user.email\">\n       <em ng-show=\"errors.mailExists\" class=\"help-block text-right\">Mail already registered! </br>Please choose another one.</em>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"inputPassword\" >Password *</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required ng-model=\"user.password\">\n    </div>\n\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign Up</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/login\">Log in</a></strong> if you already have an an user</p>\n\n  </form>\n\n</div>";
 
@@ -189,7 +223,7 @@ config.$inject = ['$routeProvider'];
 
 module.exports = config;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // const submit = require('./submit.js');
 // const logout = require('./logout.js');
 // const callRestricted = require('./callRestricted.js');
@@ -225,7 +259,7 @@ registerController.$inject = ['$scope', '$http', '$window'];
 
 module.exports = registerController;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
@@ -236,7 +270,7 @@ const registerModule = angular.module('myApp:register', ['ngRoute']).controller(
 
 module.exports = registerModule.name;
 
-},{"./config":12,"./controller":13,"angular":29,"angular-route":27}],15:[function(require,module,exports){
+},{"./config":13,"./controller":14,"angular":30,"angular-route":28}],16:[function(require,module,exports){
 const request = require('./methods/request.js');
 const responseError = require('./methods/responseError.js');
 
@@ -251,7 +285,7 @@ authInterceptor.$inject = ['$q', '$location', '$localStorage'];
 
 module.exports = authInterceptor;
 
-},{"./methods/request.js":16,"./methods/responseError.js":17}],16:[function(require,module,exports){
+},{"./methods/request.js":17,"./methods/responseError.js":18}],17:[function(require,module,exports){
 function request($localStorage, config) {
   config.headers = config.headers || {};
 
@@ -265,7 +299,7 @@ function request($localStorage, config) {
 
 module.exports = request;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 function responseError($q, rejection) {
 
   console.log('%c responseError...', 'background: #222; color: #bada55');
@@ -279,7 +313,7 @@ function responseError($q, rejection) {
 
 module.exports = responseError;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 let login = require('./methods/login');
 let saveToken = require('./methods/saveToken');
 let setCredentials = require('./methods/setCredentials');
@@ -290,7 +324,7 @@ function authService($http, $localStorage, $rootScope, jwtHelper, $location) {
 	login = login.bind(null, $http);
 	saveToken = saveToken.bind(null, $localStorage);
 	setCredentials = setCredentials.bind(null, $rootScope, jwtHelper);
-	isLoggedIn = isLoggedIn.bind(null, $, jwtHelper);
+	isLoggedIn = isLoggedIn.bind(null, $localStorage, jwtHelper);
 
 	return { login, saveToken, setCredentials, isLoggedIn };
 }
@@ -376,10 +410,13 @@ module.exports = authService;
 // authenticationServiceFn.$inject = [ '$http', '$window', '$rootScope', 'jwtHelper', '$location' ];
 // module.exports = authenticationServiceFn;
 
-},{"./methods/isLoggedIn":19,"./methods/login":20,"./methods/saveToken":21,"./methods/setCredentials":22}],19:[function(require,module,exports){
-function isLoggedIn(jwtHelper) {
+},{"./methods/isLoggedIn":20,"./methods/login":21,"./methods/saveToken":22,"./methods/setCredentials":23}],20:[function(require,module,exports){
+function isLoggedIn($localStorage, jwtHelper) {
+
 	try {
-		var token = getToken();
+		console.log('isLoggedIn (getting token)...');
+		var token = $localStorage['myApp-token'];
+		console.log(`isLoggedIn (token) → ${ token }`);
 		var tokenPayload = jwtHelper.decodeToken(token);
 		return !jwtHelper.isTokenExpired(token);
 	} catch (e) {
@@ -389,7 +426,7 @@ function isLoggedIn(jwtHelper) {
 
 module.exports = isLoggedIn;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 function login($http, user) {
 
   return $http.post('/api/authenticate', user).then(data => {
@@ -401,7 +438,7 @@ function login($http, user) {
 
 module.exports = login;
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 function saveToken($localStorage, token) {
 	$localStorage['myApp-token'] = token;
 	console.log('Token saved');
@@ -411,7 +448,7 @@ function saveToken($localStorage, token) {
 
 module.exports = saveToken;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 function setCredentials($rootScope, jwtHelper, token) {
 	console.log('setCredentials');
 	$rootScope.loggedUser = {};
@@ -427,7 +464,7 @@ function setCredentials($rootScope, jwtHelper, token) {
 
 module.exports = setCredentials;
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 const angular = require('angular');
 const ngStorage = require('ng-storage') && 'ngStorage';
 const ngJwt = require('angular-jwt');
@@ -442,7 +479,7 @@ const authModule = angular.module('myApp:services', [ngStorage, ngJwt]).factory(
 
 module.exports = authModule.name;
 
-},{"./authInterceptor":15,"./authService":18,"angular":29,"angular-jwt":25,"ng-storage":30}],24:[function(require,module,exports){
+},{"./authInterceptor":16,"./authService":19,"angular":30,"angular-jwt":26,"ng-storage":31}],25:[function(require,module,exports){
 (function() {
 
 
@@ -797,12 +834,12 @@ angular.module('angular-jwt.options', [])
   });
 
 }());
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 require('./dist/angular-jwt.js');
 module.exports = 'angular-jwt';
 
 
-},{"./dist/angular-jwt.js":24}],26:[function(require,module,exports){
+},{"./dist/angular-jwt.js":25}],27:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -1873,11 +1910,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":26}],28:[function(require,module,exports){
+},{"./angular-route":27}],29:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -33646,11 +33683,11 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":28}],30:[function(require,module,exports){
+},{"./angular":29}],31:[function(require,module,exports){
 'use strict';
 
 (function() {

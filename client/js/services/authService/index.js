@@ -8,7 +8,7 @@ function authService ( $http, $localStorage, $rootScope, jwtHelper, $location ) 
 	login = login.bind(null, $http);
 	saveToken = saveToken.bind(null, $localStorage);
 	setCredentials = setCredentials.bind(null, $rootScope, jwtHelper);
-	isLoggedIn = isLoggedIn.bind(null, $, jwtHelper);
+	isLoggedIn = isLoggedIn.bind(null, $localStorage, jwtHelper);
 
 	return { login, saveToken, setCredentials, isLoggedIn }
 
