@@ -7,3 +7,4 @@ TO-DO
   ☐ upload photos to s3bucket
   ☐ remember password via mail
   ☐ use sessionStorage or localStorage depending on "remember me" checking
+  ☐ user service method in another service method

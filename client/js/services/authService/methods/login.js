@@ -1,11 +1,23 @@
-function login( $http, user ) {
+function setCredentials( $rootScope, jwtHelper, token ) {
+
+	$rootScope.loggedUser = {};
+	var tokenPayload = jwtHelper.decodeToken( token );
+
+	$rootScope.loggedUser.username = tokenPayload.username;
+	$rootScope.loggedUser.email = tokenPayload.email;
+	$rootScope.loggedUser.roles = tokenPayload.roles;
+
+	return token;
+
+}
+
+function login( $http, $rootScope, jwtHelper, user ) {
+
+	setCredentials = setCredentials.bind(null, $rootScope, jwtHelper);
 
   return $http.post('/api/authenticate', user)
-  					.then( (data) => {
-  							console.log("auth.login...")
-  							console.log(data);
-  							return data.data.token;
-  					})
+  					.then( data => data.data.token )
+  					.then( setCredentials )
 
 }
 

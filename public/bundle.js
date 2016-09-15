@@ -35,7 +35,9 @@ function run($rootScope, $location, authService) {
 		if (!authService.isLoggedIn()) {
 			$location.path('login');
 		} else {
+
 			console.log("you're logged!!...");
+			$location.path('home');
 		}
 	};
 
@@ -58,7 +60,7 @@ module.exports = run;
 
 },{}],4:[function(require,module,exports){
 
-const htmlTemplate = "<style>\n  body {\n    padding: 0;\n  }\n  .navbar {\n    margin-bottom: 0;\n  }\n  .navbar-nav li {\n    border:1px solid red;\n    display: inline-block;\n  }\n  header {\n    background: #000;\n  }\n  header a {\n    color: white;\n  }\n  .navbar-brand a:hover {\n    color: white;\n    text-decoration: underline;\n  }\n  .navbar > * {\n    display: inline-block;\n    margin-bottom: 0;\n  }\n</style>\n\n<header>\n  <div class=\"container\">\n\n    <div class=\"navbar\">\n\n        <p class=\"navbar-brand\"><a href=\"#\">My Awesome Project</a> 😎</p>\n        <ul class=\"nav navbar-nav\">\n          <li class=\"active\">\n            <a href=\"#\">Logged as {{ $parent.loggedUser.username }}</a>\n          </li>\n          <li>\n            <a href=\"#\"><strong>Logout</strong></a>\n          </li>\n        </ul>\n\n    </div>\n\n  </div>\n</header>\n\n\n<div class=\"container\">\n\n  <!-- Main component for a primary marketing message or call to action -->\n  <div class=\"jumbotron\">\n    <h1>Navbar example</h1>\n    <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>\n    <p>To see the difference between static and fixed top navbars, just scroll.</p>\n    <p>\n      <a class=\"btn btn-lg btn-primary\" href=\"../../components/#navbar\" role=\"button\">View navbar docs &raquo;</a>\n    </p>\n  </div>\n\n</div> <!-- /container -->";
+const htmlTemplate = "<style>\n  body {\n    padding: 0;\n  }\n  .navbar {\n    margin-bottom: 0;\n  }\n  .navbar-nav li {\n    border:1px solid red;\n    display: inline-block;\n  }\n  header {\n    background: #000;\n  }\n  header a {\n    color: white;\n  }\n  .navbar-brand a:hover {\n    color: white;\n    text-decoration: underline;\n  }\n  .navbar > * {\n    display: inline-block;\n    margin-bottom: 0;\n  }\n</style>\n\n<header>\n  <div class=\"container\">\n\n    <div class=\"navbar\">\n\n        <p class=\"navbar-brand\"><a href=\"#\">My Awesome Project</a> 😎</p>\n        <ul class=\"nav navbar-nav\">\n          <li class=\"active\">\n            <a href=\"#\">Logged as {{ $parent.loggedUser.username }}</a>\n          </li>\n          <li>\n            <button ng-click=\"logout()\"><strong>Logout</strong></button>\n          </li>\n        </ul>\n\n    </div>\n\n  </div>\n</header>\n\n\n<div class=\"container\">\n\n  <!-- Main component for a primary marketing message or call to action -->\n  <div class=\"jumbotron\">\n    <h1>Navbar example</h1>\n    <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>\n    <p>To see the difference between static and fixed top navbars, just scroll.</p>\n    <p>\n      <a class=\"btn btn-lg btn-primary\" href=\"../../components/#navbar\" role=\"button\">View navbar docs &raquo;</a>\n    </p>\n  </div>\n\n</div> <!-- /container -->";
 
 function config($routeProvider) {
   $routeProvider.when('/home', {
@@ -72,30 +74,36 @@ config.$inject = ['$routeProvider'];
 module.exports = config;
 
 },{}],5:[function(require,module,exports){
-function homeController($scope) {
+function homeController($scope, authService) {
 
   const username = 'juanmaguitar';
   const password = 'juanma100';
 
   $scope.user = { username, password };
+  console.log(`logged as ${ $scope.user.username }`);
+  console.log(authService);
+  $scope.logout = authService.logout;
 }
 
-homeController.$inject = ['$scope'];
+homeController.$inject = ['$scope', 'authService'];
 
 module.exports = homeController;
 
 },{}],6:[function(require,module,exports){
 const angular = require('angular');
+
+// dependencies
 const ngRoute = require('angular-route');
+const appServices = require('../services');
 
 const homeController = require('./controller');
 const homeConfig = require('./config');
 
-const homeModule = angular.module('myApp:home', ['ngRoute']).controller('homeController', homeController).config(homeConfig);
+const homeModule = angular.module('myApp:home', [ngRoute, appServices]).controller('homeController', homeController).config(homeConfig);
 
 module.exports = homeModule.name;
 
-},{"./config":4,"./controller":5,"angular":30,"angular-route":28}],7:[function(require,module,exports){
+},{"../services":24,"./config":4,"./controller":5,"angular":30,"angular-route":28}],7:[function(require,module,exports){
 
 const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n  <form class=\"form-signin\" ng-submit=\"login()\">\n    <h3 class=\"form-signin-heading\">Please Log in</h3>\n    <div>\n      <label for=\"inputUsername\" >Username</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"UserName...\" required autofocus ng-model=\"user.username\">\n    </div>\n    <div>\n      <label for=\"inputPassword\" >Password</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password...\" required ng-model=\"user.password\">\n    </div>\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n  </form>\n\n</div>\n\n";
 
@@ -315,102 +323,25 @@ module.exports = responseError;
 
 },{}],19:[function(require,module,exports){
 let login = require('./methods/login');
+let logout = require('./methods/logout');
 let saveToken = require('./methods/saveToken');
-let setCredentials = require('./methods/setCredentials');
 let isLoggedIn = require('./methods/isLoggedIn');
 
 function authService($http, $localStorage, $rootScope, jwtHelper, $location) {
 
-	login = login.bind(null, $http);
+	login = login.bind(null, $http, $rootScope, jwtHelper);
+	logout = logout.bind(null, $localStorage, $rootScope, $location);
 	saveToken = saveToken.bind(null, $localStorage);
-	setCredentials = setCredentials.bind(null, $rootScope, jwtHelper);
 	isLoggedIn = isLoggedIn.bind(null, $localStorage, jwtHelper);
 
-	return { login, saveToken, setCredentials, isLoggedIn };
+	return { login, logout, saveToken, isLoggedIn };
 }
 
 authService.$inject = ['$http', '$localStorage', '$rootScope', 'jwtHelper', '$location'];
 
 module.exports = authService;
 
-// function authenticationServiceFn ( $http, $window, $rootScope, jwtHelper, $location ) {
-
-// 		function saveToken( token ) {
-// 			$window.localStorage['mean-token'] = token;
-// 			console.log( 'Token saved' );
-// 			setCredentials( token );
-// 		}
-
-// 		function updateClientToken() {
-// 			var token = getToken();
-// 			var tokenPayload = jwtHelper.decodeToken( token );
-// 			var clientId = tokenPayload._doc._id;
-// 			return $http.get( '/login/getClientToken/' + clientId )
-// 				.then( function( token ) {
-// 					saveToken( token.data );
-// 					return;
-// 				})
-// 		}
-
-// 		function setCredentials( token ) { // get -> token & payload and set credentials
-// 			$rootScope.credentials = {};
-// 			$rootScope.credentials.current = {};
-// 			var tokenPayload = jwtHelper.decodeToken( token );
-// 			// logged user credentials
-// 			$rootScope.credentials.userID = tokenPayload._doc._id;
-// 			$rootScope.credentials.name = tokenPayload._doc.name;
-// 			$rootScope.credentials.admin = tokenPayload._doc.admin;
-// 			$rootScope.credentials.supplier = tokenPayload._doc.supplier;
-// 			// current client info
-// 			$rootScope.credentials.current.clientID = tokenPayload._doc._id;
-// 			$rootScope.credentials.current.demandState = tokenPayload._doc.demandState;
-// 			$rootScope.credentials.current.demandDate = tokenPayload._doc.demandDate;
-// 		}
-
-// 		function isLoggedIn() {
-// 			try {
-// 				var token = getToken();
-// 				var tokenPayload = jwtHelper.decodeToken( token );
-// 				return !( jwtHelper.isTokenExpired( token ) )
-// 			} catch( e ) {
-// 				return false
-// 			}
-// 		}
-
-// 		function getToken() {
-// 			return $window.localStorage['mean-token']
-// 		}
-
-// 		function login( user ) {
-// 			return $http.post( '/login', user )
-// 		}
-
-// 		function logout() {
-// 			$window.localStorage.removeItem( 'mean-token' );
-// 			$location.path( '/' );
-// 			console.log( 'logout bye...' )
-// 		}
-
-// 		register = function( user ) {
-// 			return $http.post('/login/register', user)
-// 		}
-
-// 		return {
-// 			saveToken : saveToken,
-// 			setCredentials : setCredentials,
-// 			getToken : getToken,
-// 			isLoggedIn : isLoggedIn,
-// 			register : register,
-// 			login : login,
-// 			logout : logout,
-// 			updateClientToken : updateClientToken
-// 		}
-// }
-
-// authenticationServiceFn.$inject = [ '$http', '$window', '$rootScope', 'jwtHelper', '$location' ];
-// module.exports = authenticationServiceFn;
-
-},{"./methods/isLoggedIn":20,"./methods/login":21,"./methods/saveToken":22,"./methods/setCredentials":23}],20:[function(require,module,exports){
+},{"./methods/isLoggedIn":20,"./methods/login":21,"./methods/logout":22,"./methods/saveToken":23}],20:[function(require,module,exports){
 function isLoggedIn($localStorage, jwtHelper) {
 
 	try {
@@ -427,18 +358,43 @@ function isLoggedIn($localStorage, jwtHelper) {
 module.exports = isLoggedIn;
 
 },{}],21:[function(require,module,exports){
-function login($http, user) {
+function setCredentials($rootScope, jwtHelper, token) {
 
-  return $http.post('/api/authenticate', user).then(data => {
-    console.log("auth.login...");
-    console.log(data);
-    return data.data.token;
-  });
+	$rootScope.loggedUser = {};
+	var tokenPayload = jwtHelper.decodeToken(token);
+
+	$rootScope.loggedUser.username = tokenPayload.username;
+	$rootScope.loggedUser.email = tokenPayload.email;
+	$rootScope.loggedUser.roles = tokenPayload.roles;
+
+	return token;
+}
+
+function login($http, $rootScope, jwtHelper, user) {
+
+	setCredentials = setCredentials.bind(null, $rootScope, jwtHelper);
+
+	return $http.post('/api/authenticate', user).then(data => data.data.token).then(setCredentials);
 }
 
 module.exports = login;
 
 },{}],22:[function(require,module,exports){
+function logout($localStorage, $rootScope, $location) {
+	console.log('before...');
+	console.log($localStorage);
+	console.log($rootScope);
+	delete $localStorage['myApp-token'];
+	delete $rootScope.loggedUser;
+	console.log('after...');
+	console.log($localStorage);
+	console.log($rootScope);
+	$location.path('/login');
+}
+
+module.exports = logout;
+
+},{}],23:[function(require,module,exports){
 function saveToken($localStorage, token) {
 	$localStorage['myApp-token'] = token;
 	console.log('Token saved');
@@ -447,22 +403,6 @@ function saveToken($localStorage, token) {
 }
 
 module.exports = saveToken;
-
-},{}],23:[function(require,module,exports){
-function setCredentials($rootScope, jwtHelper, token) {
-	console.log('setCredentials');
-	$rootScope.loggedUser = {};
-	var tokenPayload = jwtHelper.decodeToken(token);
-
-	console.log(tokenPayload);
-	// logged user credentials
-	$rootScope.loggedUser.username = tokenPayload.username;
-	$rootScope.loggedUser.email = tokenPayload.email;
-	$rootScope.loggedUser.roles = tokenPayload.roles;
-	console.log($rootScope.currentUser);
-}
-
-module.exports = setCredentials;
 
 },{}],24:[function(require,module,exports){
 const angular = require('angular');

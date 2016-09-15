@@ -11,7 +11,9 @@ function run ( $rootScope, $location, authService ) {
 				$location.path( 'login' )
 		}
 		else {
+
 			console.log("you're logged!!...");
+			$location.path( 'home' )
 		}
 	}
 
