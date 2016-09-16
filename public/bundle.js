@@ -14,7 +14,7 @@ const moduleDependencies = [ngRoute, servicesModule, loginModule, registerModule
 
 angular.module('myApp', moduleDependencies).config(appConfig).run(appRun);
 
-},{"./config/config.js":2,"./config/run.js":3,"./home":6,"./login":12,"./register":15,"./services":24,"angular":30,"angular-route":28}],2:[function(require,module,exports){
+},{"./config/config.js":2,"./config/run.js":3,"./home":6,"./login":12,"./register":15,"./services":25,"angular":31,"angular-route":29}],2:[function(require,module,exports){
 function config($httpProvider, $routeProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 };
@@ -26,31 +26,15 @@ module.exports = config;
 function run($rootScope, $location, authService) {
 
 	const redirectIfLogged = () => {
-
 		const isLogged = authService.isLoggedIn();
-
-		console.log('isLogged?');
-		console.log(isLogged);
-
-		if (!authService.isLoggedIn()) {
-			$location.path('login');
-		} else {
-
-			console.log("you're logged!!...");
-			$location.path('home');
-		}
+		$location.path(!authService.isLoggedIn() ? 'login' : 'home');
 	};
 
-	console.log("---->>>> run....");
 	if ($location.path() !== 'login') {
 		redirectIfLogged();
 	}
 
 	$rootScope.$on('$routeChangeStart', function (event, nextRoute, currentRoute) {
-		console.log("---->>>> $routeChangeStart");
-		console.log(event);
-		console.log(nextRoute);
-		console.log(currentRoute);
 		redirectIfLogged();
 	});
 }
@@ -103,9 +87,9 @@ const homeModule = angular.module('myApp:home', [ngRoute, appServices]).controll
 
 module.exports = homeModule.name;
 
-},{"../services":24,"./config":4,"./controller":5,"angular":30,"angular-route":28}],7:[function(require,module,exports){
+},{"../services":25,"./config":4,"./controller":5,"angular":31,"angular-route":29}],7:[function(require,module,exports){
 
-const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n  <form class=\"form-signin\" ng-submit=\"login()\">\n    <h3 class=\"form-signin-heading\">Please Log in</h3>\n    <div>\n      <label for=\"inputUsername\" >Username</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"UserName...\" required autofocus ng-model=\"user.username\">\n    </div>\n    <div>\n      <label for=\"inputPassword\" >Password</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password...\" required ng-model=\"user.password\">\n    </div>\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n  </form>\n\n</div>\n\n";
+const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n\n  <form class=\"form-signin\" ng-submit=\"login()\">\n    <h3 class=\"form-signin-heading\">Please Log in</h3>\n\n    <div class=\"alert alert-danger\" ng-show=\"error.message\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n      <p><strong>{{ error.message }}</strong></p>\n      <p>Please try again...</p>\n    </div>\n\n    <div ng-class=\"{ 'has-error': error.message }\">\n      <label for=\"inputUsername\" >Username</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"UserName...\" required autofocus ng-model=\"user.username\">\n    </div>\n    <div ng-class=\"{ 'has-error': error.message }\">\n      <label for=\"inputPassword\" >Password</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password...\" required ng-model=\"user.password\">\n    </div>\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n  </form>\n\n</div>\n\n";
 
 function config($routeProvider) {
   $routeProvider.when('/login', {
@@ -145,14 +129,7 @@ function loginController($scope, $http, $localStorage, $location, authService) {
   const password = 'juanma100';
 
   $scope.user = { username, password };
-  $scope.isAuthenticated = false;
-  $scope.welcome = '';
-  $scope.message = '';
-
   $scope.login = login.bind(null, $scope, authService, $localStorage, $http, $location);
-
-  $scope.logout = logout.bind(null, $scope, $localStorage);
-  $scope.callRestricted = callRestricted.bind(null, $scope, $http);
 }
 
 loginController.$inject = ['$scope', '$http', '$localStorage', '$location', 'authService'];
@@ -160,38 +137,16 @@ loginController.$inject = ['$scope', '$http', '$localStorage', '$location', 'aut
 module.exports = loginController;
 
 },{"./callRestricted.js":8,"./login.js":10,"./logout.js":11}],10:[function(require,module,exports){
-// const url_base64_decode = require('../utils').url_base64_decode;
+function login($scope, authService, $localStorage, $http, $location) {
 
-function submit($scope, authService, $localStorage, $http, $location) {
-
-  authService.login($scope.user).then(authService.saveToken).then(authService.setCredentials).then(() => $location.path('home')).catch(authService.logout);
-
-  // $http
-  //   .post('/api/authenticate', $scope.user)
-  //   .success( (data, status, headers, config) => {
-
-  //     console.log("habemus token!")
-  //     $localStorage.token = data.token;
-  //     $scope.isAuthenticated = true;
-  //     var encodedProfile = data.token.split('.')[1];
-  //     var profile = JSON.parse(url_base64_decode(encodedProfile));
-  //     console.log(profile);
-  //     // $scope.welcome = `Welcome ${profile.name}`;
-  //     // $scope.welcome += profile.admin ? ' (ADMIN)' : null;
-  //     $location.path('home');
-  //   })
-  //   .error( (data, status, headers, config) => {
-  //     // Erase the token if the user fails to log in
-  //     delete $localStorage.token;
-  //     $scope.isAuthenticated = false;
-
-  //     // Handle login errors here
-  //     $scope.error = 'Error: Invalid user or password';
-  //     $scope.welcome = '';
-  //   });
+  authService.login($scope.user).then(authService.saveToken).then(authService.setCredentials).then(() => $location.path('home')).catch(error => {
+    const message = error.data.message;
+    $scope.error = { message };
+    console.log(error);
+  });
 }
 
-module.exports = submit;
+module.exports = login;
 
 },{}],11:[function(require,module,exports){
 function logout($scope, $localStorage) {
@@ -216,7 +171,7 @@ const loginModule = angular.module('myApp:login', ['ngRoute', 'ngStorage']).cont
 
 module.exports = loginModule.name;
 
-},{"./config":7,"./controller":9,"angular":30,"angular-route":28,"ng-storage":31}],13:[function(require,module,exports){
+},{"./config":7,"./controller":9,"angular":31,"angular-route":29,"ng-storage":32}],13:[function(require,module,exports){
 
 const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n  <form class=\"form-signin\" ng-submit=\"createUser()\">\n    <h3 class=\"form-signin-heading\">Create a new user</h3>\n    <p><em>Fields with * are mandatory</em></p>\n\n    <div class=\"form-group\" ng-class=\"{ 'has-error': errors.usernameExists }\">\n      <label class=\"control-label\" for=\"inputUsername\" >User name *</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"User Name\" required autofocus ng-model=\"user.username\">\n      <em ng-show=\"errors.usernameExists\" class=\"help-block text-right\">User Name already registered! </br>Please choose another one.</em>\n    </div>\n\n    <div class=\"form-group\" ng-class=\"{ 'has-error': errors.mailExists }\">\n      <label class=\"control-label\" for=\"inputEmail\" >Email address *</label>\n      <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required ng-model=\"user.email\">\n       <em ng-show=\"errors.mailExists\" class=\"help-block text-right\">Mail already registered! </br>Please choose another one.</em>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"inputPassword\" >Password *</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required ng-model=\"user.password\">\n    </div>\n\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign Up</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/login\">Log in</a></strong> if you already have an an user</p>\n\n  </form>\n\n</div>";
 
@@ -278,7 +233,7 @@ const registerModule = angular.module('myApp:register', ['ngRoute']).controller(
 
 module.exports = registerModule.name;
 
-},{"./config":13,"./controller":14,"angular":30,"angular-route":28}],16:[function(require,module,exports){
+},{"./config":13,"./controller":14,"angular":31,"angular-route":29}],16:[function(require,module,exports){
 const request = require('./methods/request.js');
 const responseError = require('./methods/responseError.js');
 
@@ -311,9 +266,9 @@ module.exports = request;
 function responseError($q, rejection) {
 
   console.log('%c responseError...', 'background: #222; color: #bada55');
-
-  if (response.status === 401 || response.status === 403) {
-    console.log("request rejected!");
+  console.log(rejection);
+  if (rejection.status === 404) {
+    console.log("Credentials not valid");
     // handle the case where the user is not authenticated
   }
   return $q.reject(rejection);
@@ -326,28 +281,26 @@ let login = require('./methods/login');
 let logout = require('./methods/logout');
 let saveToken = require('./methods/saveToken');
 let isLoggedIn = require('./methods/isLoggedIn');
+let setCredentials = require('./methods/setCredentials');
 
 function authService($http, $localStorage, $rootScope, jwtHelper, $location) {
 
-	login = login.bind(null, $http, $rootScope, jwtHelper);
-	logout = logout.bind(null, $localStorage, $rootScope, $location);
-	saveToken = saveToken.bind(null, $localStorage);
-	isLoggedIn = isLoggedIn.bind(null, $localStorage, jwtHelper);
-
-	return { login, logout, saveToken, isLoggedIn };
+	this.login = login.bind(null, $http, $rootScope, jwtHelper);
+	this.logout = logout.bind(null, $localStorage, $rootScope, $location);
+	this.saveToken = saveToken.bind(null, $localStorage);
+	this.isLoggedIn = isLoggedIn.bind(null, $localStorage, jwtHelper);
+	this.setCredentials = setCredentials.bind(null, $rootScope, jwtHelper);
 }
 
 authService.$inject = ['$http', '$localStorage', '$rootScope', 'jwtHelper', '$location'];
 
 module.exports = authService;
 
-},{"./methods/isLoggedIn":20,"./methods/login":21,"./methods/logout":22,"./methods/saveToken":23}],20:[function(require,module,exports){
+},{"./methods/isLoggedIn":20,"./methods/login":21,"./methods/logout":22,"./methods/saveToken":23,"./methods/setCredentials":24}],20:[function(require,module,exports){
 function isLoggedIn($localStorage, jwtHelper) {
 
 	try {
-		console.log('isLoggedIn (getting token)...');
 		var token = $localStorage['myApp-token'];
-		console.log(`isLoggedIn (token) → ${ token }`);
 		var tokenPayload = jwtHelper.decodeToken(token);
 		return !jwtHelper.isTokenExpired(token);
 	} catch (e) {
@@ -358,6 +311,32 @@ function isLoggedIn($localStorage, jwtHelper) {
 module.exports = isLoggedIn;
 
 },{}],21:[function(require,module,exports){
+function login($http, $rootScope, jwtHelper, user) {
+
+  return $http.post('/api/authenticate', user).then(data => data.data.token);
+}
+
+module.exports = login;
+
+},{}],22:[function(require,module,exports){
+function logout($localStorage, $rootScope, $location) {
+
+	delete $localStorage['myApp-token'];
+	delete $rootScope.loggedUser;
+	$location.path('/login');
+}
+
+module.exports = logout;
+
+},{}],23:[function(require,module,exports){
+function saveToken($localStorage, token) {
+	$localStorage['myApp-token'] = token;
+	return token;
+}
+
+module.exports = saveToken;
+
+},{}],24:[function(require,module,exports){
 function setCredentials($rootScope, jwtHelper, token) {
 
 	$rootScope.loggedUser = {};
@@ -370,41 +349,9 @@ function setCredentials($rootScope, jwtHelper, token) {
 	return token;
 }
 
-function login($http, $rootScope, jwtHelper, user) {
+module.exports = setCredentials;
 
-	setCredentials = setCredentials.bind(null, $rootScope, jwtHelper);
-
-	return $http.post('/api/authenticate', user).then(data => data.data.token).then(setCredentials);
-}
-
-module.exports = login;
-
-},{}],22:[function(require,module,exports){
-function logout($localStorage, $rootScope, $location) {
-	console.log('before...');
-	console.log($localStorage);
-	console.log($rootScope);
-	delete $localStorage['myApp-token'];
-	delete $rootScope.loggedUser;
-	console.log('after...');
-	console.log($localStorage);
-	console.log($rootScope);
-	$location.path('/login');
-}
-
-module.exports = logout;
-
-},{}],23:[function(require,module,exports){
-function saveToken($localStorage, token) {
-	$localStorage['myApp-token'] = token;
-	console.log('Token saved');
-	//setCredentials( token );
-	return token;
-}
-
-module.exports = saveToken;
-
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 const angular = require('angular');
 const ngStorage = require('ng-storage') && 'ngStorage';
 const ngJwt = require('angular-jwt');
@@ -415,11 +362,11 @@ const authService = require('./authService');
 console.log(ngStorage);
 console.log(ngJwt);
 
-const authModule = angular.module('myApp:services', [ngStorage, ngJwt]).factory('authInterceptor', authInterceptor).factory('authService', authService);
+const authModule = angular.module('myApp:services', [ngStorage, ngJwt]).factory('authInterceptor', authInterceptor).service('authService', authService);
 
 module.exports = authModule.name;
 
-},{"./authInterceptor":16,"./authService":19,"angular":30,"angular-jwt":26,"ng-storage":31}],25:[function(require,module,exports){
+},{"./authInterceptor":16,"./authService":19,"angular":31,"angular-jwt":27,"ng-storage":32}],26:[function(require,module,exports){
 (function() {
 
 
@@ -774,12 +721,12 @@ angular.module('angular-jwt.options', [])
   });
 
 }());
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 require('./dist/angular-jwt.js');
 module.exports = 'angular-jwt';
 
 
-},{"./dist/angular-jwt.js":25}],27:[function(require,module,exports){
+},{"./dist/angular-jwt.js":26}],28:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -1850,11 +1797,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":27}],29:[function(require,module,exports){
+},{"./angular-route":28}],30:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -33623,11 +33570,11 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":29}],31:[function(require,module,exports){
+},{"./angular":30}],32:[function(require,module,exports){
 'use strict';
 
 (function() {

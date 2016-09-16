@@ -1,13 +1,21 @@
 <div class="container">
   <h1 class="text-center">My Super App ⚡️</h1>
 
+
   <form class="form-signin" ng-submit="login()">
     <h3 class="form-signin-heading">Please Log in</h3>
-    <div>
+
+    <div class="alert alert-danger" ng-show="error.message">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <p><strong>{{ error.message }}</strong></p>
+      <p>Please try again...</p>
+    </div>
+
+    <div ng-class="{ 'has-error': error.message }">
       <label for="inputUsername" >Username</label>
       <input type="text" id="inputUsername" class="form-control" placeholder="UserName..." required autofocus ng-model="user.username">
     </div>
-    <div>
+    <div ng-class="{ 'has-error': error.message }">
       <label for="inputPassword" >Password</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Password..." required ng-model="user.password">
     </div>

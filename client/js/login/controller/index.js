@@ -8,15 +8,7 @@ function loginController($scope, $http, $localStorage, $location, authService) {
   const password = 'juanma100';
 
   $scope.user = { username, password };
-  $scope.isAuthenticated = false;
-  $scope.welcome = '';
-  $scope.message = '';
-
-  $scope.login = login.bind(null, $scope, authService, $localStorage, $http, $location);
-
-
-  $scope.logout = logout.bind(null, $scope, $localStorage);
-  $scope.callRestricted = callRestricted.bind(null, $scope, $http);
+ 	$scope.login = login.bind(null, $scope, authService, $localStorage, $http, $location);
 
 }
 

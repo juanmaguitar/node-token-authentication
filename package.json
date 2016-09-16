@@ -2,7 +2,7 @@
   "name": "node-token-authentication",
   "main": "server.js",
   "scripts": {
-    "dev": "clear && NODE_PATH=. DEBUG=routes:api:authenticate,schemas:user,test:models:user nodemon ./ & npm run watch:all",
+    "dev": "clear && NODE_PATH=. DEBUG=routes:api:authenticate,schemas:user,test:models:user nodemon --debug ./ & npm run watch:all",
     "start": "node ./",
     "build:css": "node-sass --include-path scss client/scss/main.scss public/main.css",
     "build:js": "browserify client/js/app -o public/bundle.js -t babelify brfs",

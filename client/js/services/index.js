@@ -10,6 +10,6 @@ console.log(ngJwt)
 
 const authModule = angular.module('myApp:services',[ ngStorage, ngJwt ])
 	.factory('authInterceptor', authInterceptor)
-	.factory('authService', authService)
+	.service('authService', authService)
 
 module.exports = authModule.name;

@@ -15,9 +15,9 @@ function authenticate(req, res) {
 
 			if (!user) {
 
-				res.json({
+				res.status(404).json({
 					success: false,
-					message: 'Authentication failed. User not found.'
+					message: 'Credentials not valid' // 'Authentication failed. User not found.'
 				});
 
 			} else if (user) {
@@ -45,9 +45,9 @@ function authenticate(req, res) {
 					})
 					.catch(function(err) {
 
-						res.json({
+						res.status(404).json({
 							success: false,
-							message: 'Authentication failed. Wrong password.'
+							message: 'Credentials not valid' //'Authentication failed. Wrong password.'
 						});
 
 					})

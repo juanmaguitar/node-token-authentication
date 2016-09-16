@@ -347,38 +347,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
-			"settings":
-			{
-				"buffer_size": 779,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/js/services/authService/index.js",
-			"settings":
-			{
-				"buffer_size": 3105,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/js/config/run.js",
-			"settings":
-			{
-				"buffer_size": 730,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/js/home/controller/index.js",
-			"settings":
-			{
-				"buffer_size": 217,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -926,7 +894,6 @@
 	"expanded_folders":
 	[
 		"/Users/JuanMa/www/node-token-authentication",
-		"/Users/JuanMa/www/node-token-authentication/client",
 		"/Users/JuanMa/www/node-token-authentication/client/js",
 		"/Users/JuanMa/www/node-token-authentication/client/js/config",
 		"/Users/JuanMa/www/node-token-authentication/client/js/home",
@@ -944,12 +911,14 @@
 	],
 	"file_history":
 	[
-		"/Users/JuanMa/www/node-token-authentication/client/js/app.js",
+		"/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/index.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/config/run.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/home/controller/index.js",
+		"/Users/JuanMa/www/node-token-authentication/client/js/app.js",
 		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods/getToken.js",
 		"/Users/JuanMa/www/node-token-authentication/client/js/home/template.html",
 		"/Users/JuanMa/www/node-token-authentication/client/js/config/config.js",
-		"/Users/JuanMa/www/node-token-authentication/client/js/config/run.js",
 		"/Users/JuanMa/www/node-token-authentication/client/js/services/authService/methods/isLoggedIn.js",
 		"/Users/JuanMa/www/node-token-authentication/project.TODO",
 		"/Users/JuanMa/www/node-token-authentication/.gitignore",
@@ -1069,9 +1038,7 @@
 		"/Users/JuanMa/www/node-token-authentication/client/src/scss/main.scss",
 		"/Users/JuanMa/www/node-token-authentication/client/src/scss/_custom.scs",
 		"/Users/JuanMa/www/node-token-authentication/client/src/js/app.js",
-		"/Users/JuanMa/www/node-token-authentication/node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss",
-		"/Users/JuanMa/www/node-token-authentication/client/src/scss/main.scs",
-		"/Users/JuanMa/www/node-token-authentication/server/routes/root/handlers/setup.js"
+		"/Users/JuanMa/www/node-token-authentication/node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss"
 	],
 	"find":
 	{
@@ -1365,130 +1332,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/Users/JuanMa/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 779,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								291,
-								291
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "client/js/services/authService/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3105,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2280,
-								2280
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1406.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "client/js/config/run.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 730,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								134,
-								134
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 3,
-					"file": "client/js/home/controller/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 217,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								146,
-								146
-							]
-						],
-						"settings":
-						{
-							"open_with_edit": true,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1509,18 +1354,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.66,
 			1.0
 		],
 		"rows":
@@ -1603,7 +1441,7 @@
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 313.0,
 	"status_bar_visible": true,
 	"template_settings":
