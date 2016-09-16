@@ -1,18 +1,14 @@
 function run ( $rootScope, $location, authService ) {
 
-	const redirectIfLogged = () => {
-		const isLogged = authService.isLoggedIn();
-		$location.path( !authService.isLoggedIn() ? 'login' : 'home' );
-	}
-
-	if ( $location.path() !== 'login' ) {
-		redirectIfLogged();
-	}
-
 	$rootScope.$on( '$routeChangeStart', function( event, nextRoute, currentRoute ) {
-		redirectIfLogged();
-	})
 
+		const currentPath = $location.path();
+
+		if ( !['/login','/register'].includes( currentPath ) ) {
+			$location.path( !authService.isLoggedIn() ? 'login' : 'home' );
+		}
+
+	})
 }
 
 run.$inject = [ '$rootScope', '$location', 'authService' ];

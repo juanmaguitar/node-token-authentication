@@ -14,7 +14,7 @@ const moduleDependencies = [ngRoute, servicesModule, loginModule, registerModule
 
 angular.module('myApp', moduleDependencies).config(appConfig).run(appRun);
 
-},{"./config/config.js":2,"./config/run.js":3,"./home":6,"./login":12,"./register":15,"./services":25,"angular":31,"angular-route":29}],2:[function(require,module,exports){
+},{"./config/config.js":2,"./config/run.js":3,"./home":6,"./login":10,"./register":13,"./services":23,"angular":29,"angular-route":27}],2:[function(require,module,exports){
 function config($httpProvider, $routeProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 };
@@ -25,17 +25,13 @@ module.exports = config;
 },{}],3:[function(require,module,exports){
 function run($rootScope, $location, authService) {
 
-	const redirectIfLogged = () => {
-		const isLogged = authService.isLoggedIn();
-		$location.path(!authService.isLoggedIn() ? 'login' : 'home');
-	};
-
-	if ($location.path() !== 'login') {
-		redirectIfLogged();
-	}
-
 	$rootScope.$on('$routeChangeStart', function (event, nextRoute, currentRoute) {
-		redirectIfLogged();
+
+		const currentPath = $location.path();
+
+		if (!['/login', '/register'].includes(currentPath)) {
+			$location.path(!authService.isLoggedIn() ? 'login' : 'home');
+		}
 	});
 }
 
@@ -87,7 +83,7 @@ const homeModule = angular.module('myApp:home', [ngRoute, appServices]).controll
 
 module.exports = homeModule.name;
 
-},{"../services":25,"./config":4,"./controller":5,"angular":31,"angular-route":29}],7:[function(require,module,exports){
+},{"../services":23,"./config":4,"./controller":5,"angular":29,"angular-route":27}],7:[function(require,module,exports){
 
 const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n\n  <form class=\"form-signin\" ng-submit=\"login()\">\n    <h3 class=\"form-signin-heading\">Please Log in</h3>\n\n    <div class=\"alert alert-danger\" ng-show=\"error.message\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n      <p><strong>{{ error.message }}</strong></p>\n      <p>Please try again...</p>\n    </div>\n\n    <div ng-class=\"{ 'has-error': error.message }\">\n      <label for=\"inputUsername\" >Username</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"UserName...\" required autofocus ng-model=\"user.username\">\n    </div>\n    <div ng-class=\"{ 'has-error': error.message }\">\n      <label for=\"inputPassword\" >Password</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password...\" required ng-model=\"user.password\">\n    </div>\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n  </form>\n\n</div>\n\n";
 
@@ -103,41 +99,23 @@ config.$inject = ['$routeProvider'];
 module.exports = config;
 
 },{}],8:[function(require,module,exports){
-function callRestricted($scope, $http) {
-
-  const url = '/api/users';
-  const method = 'GET';
-
-  $http({ url, method }).success(data /*, status, headers, config*/ => {
-    console.log(data);
-    $scope.message = `Users: ${ data.length }`;
-  }).error(data /*, status, headers, config*/ => {
-    alert(data);
-  });
-}
-
-module.exports = callRestricted;
-
-},{}],9:[function(require,module,exports){
 const login = require('./login.js');
-const logout = require('./logout.js');
-const callRestricted = require('./callRestricted.js');
 
-function loginController($scope, $http, $localStorage, $location, authService) {
+function loginController($scope, $location, authService) {
 
   const username = 'juanmaguitar';
   const password = 'juanma100';
 
   $scope.user = { username, password };
-  $scope.login = login.bind(null, $scope, authService, $localStorage, $http, $location);
+  $scope.login = login.bind(null, $scope, $location, authService);
 }
 
-loginController.$inject = ['$scope', '$http', '$localStorage', '$location', 'authService'];
+loginController.$inject = ['$scope', '$location', 'authService'];
 
 module.exports = loginController;
 
-},{"./callRestricted.js":8,"./login.js":10,"./logout.js":11}],10:[function(require,module,exports){
-function login($scope, authService, $localStorage, $http, $location) {
+},{"./login.js":9}],9:[function(require,module,exports){
+function login($scope, $location, authService) {
 
   authService.login($scope.user).then(authService.saveToken).then(authService.setCredentials).then(() => $location.path('home')).catch(error => {
     const message = error.data.message;
@@ -148,18 +126,7 @@ function login($scope, authService, $localStorage, $http, $location) {
 
 module.exports = login;
 
-},{}],11:[function(require,module,exports){
-function logout($scope, $localStorage) {
-
-  $scope.welcome = '';
-  $scope.message = '';
-  $scope.isAuthenticated = false;
-  delete $localStorage.token;
-}
-
-module.exports = logout;
-
-},{}],12:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
 const ngStorage = require('ng-storage');
@@ -171,7 +138,7 @@ const loginModule = angular.module('myApp:login', ['ngRoute', 'ngStorage']).cont
 
 module.exports = loginModule.name;
 
-},{"./config":7,"./controller":9,"angular":31,"angular-route":29,"ng-storage":32}],13:[function(require,module,exports){
+},{"./config":7,"./controller":8,"angular":29,"angular-route":27,"ng-storage":30}],11:[function(require,module,exports){
 
 const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n  <form class=\"form-signin\" ng-submit=\"createUser()\">\n    <h3 class=\"form-signin-heading\">Create a new user</h3>\n    <p><em>Fields with * are mandatory</em></p>\n\n    <div class=\"form-group\" ng-class=\"{ 'has-error': errors.usernameExists }\">\n      <label class=\"control-label\" for=\"inputUsername\" >User name *</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"User Name\" required autofocus ng-model=\"user.username\">\n      <em ng-show=\"errors.usernameExists\" class=\"help-block text-right\">User Name already registered! </br>Please choose another one.</em>\n    </div>\n\n    <div class=\"form-group\" ng-class=\"{ 'has-error': errors.mailExists }\">\n      <label class=\"control-label\" for=\"inputEmail\" >Email address *</label>\n      <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required ng-model=\"user.email\">\n       <em ng-show=\"errors.mailExists\" class=\"help-block text-right\">Mail already registered! </br>Please choose another one.</em>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"inputPassword\" >Password *</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required ng-model=\"user.password\">\n    </div>\n\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign Up</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/login\">Log in</a></strong> if you already have an an user</p>\n\n  </form>\n\n</div>";
 
@@ -186,7 +153,7 @@ config.$inject = ['$routeProvider'];
 
 module.exports = config;
 
-},{}],14:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // const submit = require('./submit.js');
 // const logout = require('./logout.js');
 // const callRestricted = require('./callRestricted.js');
@@ -222,7 +189,7 @@ registerController.$inject = ['$scope', '$http', '$window'];
 
 module.exports = registerController;
 
-},{}],15:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
@@ -233,7 +200,7 @@ const registerModule = angular.module('myApp:register', ['ngRoute']).controller(
 
 module.exports = registerModule.name;
 
-},{"./config":13,"./controller":14,"angular":31,"angular-route":29}],16:[function(require,module,exports){
+},{"./config":11,"./controller":12,"angular":29,"angular-route":27}],14:[function(require,module,exports){
 const request = require('./methods/request.js');
 const responseError = require('./methods/responseError.js');
 
@@ -248,7 +215,7 @@ authInterceptor.$inject = ['$q', '$location', '$localStorage'];
 
 module.exports = authInterceptor;
 
-},{"./methods/request.js":17,"./methods/responseError.js":18}],17:[function(require,module,exports){
+},{"./methods/request.js":15,"./methods/responseError.js":16}],15:[function(require,module,exports){
 function request($localStorage, config) {
   config.headers = config.headers || {};
 
@@ -262,11 +229,12 @@ function request($localStorage, config) {
 
 module.exports = request;
 
-},{}],18:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 function responseError($q, rejection) {
 
   console.log('%c responseError...', 'background: #222; color: #bada55');
   console.log(rejection);
+
   if (rejection.status === 404) {
     console.log("Credentials not valid");
     // handle the case where the user is not authenticated
@@ -276,7 +244,7 @@ function responseError($q, rejection) {
 
 module.exports = responseError;
 
-},{}],19:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 let login = require('./methods/login');
 let logout = require('./methods/logout');
 let saveToken = require('./methods/saveToken');
@@ -296,7 +264,7 @@ authService.$inject = ['$http', '$localStorage', '$rootScope', 'jwtHelper', '$lo
 
 module.exports = authService;
 
-},{"./methods/isLoggedIn":20,"./methods/login":21,"./methods/logout":22,"./methods/saveToken":23,"./methods/setCredentials":24}],20:[function(require,module,exports){
+},{"./methods/isLoggedIn":18,"./methods/login":19,"./methods/logout":20,"./methods/saveToken":21,"./methods/setCredentials":22}],18:[function(require,module,exports){
 function isLoggedIn($localStorage, jwtHelper) {
 
 	try {
@@ -310,7 +278,7 @@ function isLoggedIn($localStorage, jwtHelper) {
 
 module.exports = isLoggedIn;
 
-},{}],21:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 function login($http, $rootScope, jwtHelper, user) {
 
   return $http.post('/api/authenticate', user).then(data => data.data.token);
@@ -318,7 +286,7 @@ function login($http, $rootScope, jwtHelper, user) {
 
 module.exports = login;
 
-},{}],22:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 function logout($localStorage, $rootScope, $location) {
 
 	delete $localStorage['myApp-token'];
@@ -328,7 +296,7 @@ function logout($localStorage, $rootScope, $location) {
 
 module.exports = logout;
 
-},{}],23:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 function saveToken($localStorage, token) {
 	$localStorage['myApp-token'] = token;
 	return token;
@@ -336,7 +304,7 @@ function saveToken($localStorage, token) {
 
 module.exports = saveToken;
 
-},{}],24:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 function setCredentials($rootScope, jwtHelper, token) {
 
 	$rootScope.loggedUser = {};
@@ -351,7 +319,7 @@ function setCredentials($rootScope, jwtHelper, token) {
 
 module.exports = setCredentials;
 
-},{}],25:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 const angular = require('angular');
 const ngStorage = require('ng-storage') && 'ngStorage';
 const ngJwt = require('angular-jwt');
@@ -359,14 +327,11 @@ const ngJwt = require('angular-jwt');
 const authInterceptor = require('./authInterceptor');
 const authService = require('./authService');
 
-console.log(ngStorage);
-console.log(ngJwt);
-
 const authModule = angular.module('myApp:services', [ngStorage, ngJwt]).factory('authInterceptor', authInterceptor).service('authService', authService);
 
 module.exports = authModule.name;
 
-},{"./authInterceptor":16,"./authService":19,"angular":31,"angular-jwt":27,"ng-storage":32}],26:[function(require,module,exports){
+},{"./authInterceptor":14,"./authService":17,"angular":29,"angular-jwt":25,"ng-storage":30}],24:[function(require,module,exports){
 (function() {
 
 
@@ -721,12 +686,12 @@ angular.module('angular-jwt.options', [])
   });
 
 }());
-},{}],27:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 require('./dist/angular-jwt.js');
 module.exports = 'angular-jwt';
 
 
-},{"./dist/angular-jwt.js":26}],28:[function(require,module,exports){
+},{"./dist/angular-jwt.js":24}],26:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -1797,11 +1762,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],29:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":28}],30:[function(require,module,exports){
+},{"./angular-route":26}],28:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -33570,11 +33535,11 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],31:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":30}],32:[function(require,module,exports){
+},{"./angular":28}],30:[function(require,module,exports){
 'use strict';
 
 (function() {

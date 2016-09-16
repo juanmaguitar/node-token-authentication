@@ -1,10 +1,10 @@
 TO-DO
-  ☐ Create AuthService for login & register
-  ☐ User Service in Controllers
-  ☐ Remove base-64 function and use jwt-angular dependency
+  ✔ Create AuthService for login & register @done (16-09-16 20:15)
+  ✔ User Service in Controllers @done (16-09-16 20:15)
+  ✔ Remove base-64 function and use jwt-angular dependency @done (16-09-16 20:15)
   ☐ Change of URL → detect if user is logged → if not to login page
   ☐ load bootstrap (angular version) → menu profile (logout)
   ☐ upload photos to s3bucket
   ☐ remember password via mail
   ☐ use sessionStorage or localStorage depending on "remember me" checking
-  ☐ user service method in another service method
+  ✔ user service method in another service method @done (16-09-16 20:15)

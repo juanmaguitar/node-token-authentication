@@ -1,4 +1,4 @@
-function login( $scope, authService, $localStorage, $http, $location ) {
+function login( $scope, $location, authService ) {
 
   authService.login( $scope.user )
     .then( authService.saveToken )
