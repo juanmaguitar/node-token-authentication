@@ -1,8 +1,9 @@
-function isLoggedIn($localStorage, jwtHelper) {
+function isLoggedIn( storageService, jwtHelper ) {
 
 	try {
-		var token = $localStorage['myApp-token'];
+		var token = storageService.readToken();
 		var tokenPayload = jwtHelper.decodeToken( token );
+		console.log(`tokenPayload = ${tokenPayload}`)
 		return !( jwtHelper.isTokenExpired( token ) )
 	} catch( e ) {
 		return false

@@ -1,6 +1,6 @@
-function logout( $localStorage, $rootScope, $location) {
+function logout( storageService, $rootScope, $location) {
 
-	delete $localStorage['myApp-token'];
+	storageService.removeToken();
 	delete $rootScope.loggedUser;
 	$location.path( '/login' );
 }

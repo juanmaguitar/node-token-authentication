@@ -4,8 +4,6 @@ function homeController($scope, authService) {
   const password = 'juanma100';
 
   $scope.user = { username, password };
-  console.log( `logged as ${$scope.user.username}` )
-  console.log(authService);
   $scope.logout = authService.logout;
 
 }
