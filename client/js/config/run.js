@@ -1,25 +1,27 @@
-function run ( $rootScope, $location, authService ) {
+function run ( $rootScope, $location, authService, storageService ) {
 
 
-	const redirectIfLogged = () => {
+	const redirectIfLogged = ( nextRoute ) => {
 		if ( !['/login','/register'].includes( $location.path() ) ) {
-			$location.path( authService.isLoggedIn() ? 'home' : 'login' );
+			if ( authService.isLoggedIn() ) {
+				const token = storageService.readToken();
+				authService.setCredentials(token)
+				$location.path( nextRoute ? nextRoute.$$route.originalPath : 'home');
+			}
+			else {
+				$location.path( 'login');
+			}
+
 		}
 	}
 
 	$rootScope.$on( '$routeChangeStart', function( event, nextRoute, currentRoute ) {
-		// console.log(event);
-		// console.log(nextRoute);
-		// console.log(currentRoute);
-		console.log( `isLoggedIn = ${authService.isLoggedIn()}` );
-		const nextPath = nextRoute.$$route.originalPath;
-		$location.path( authService.isLoggedIn() ? nextPath : 'login' );
-		//redirectIfLogged();
+		redirectIfLogged(nextRoute);
 	})
 
 	redirectIfLogged();
 
 }
 
-run.$inject = [ '$rootScope', '$location', 'authService' ];
+run.$inject = [ '$rootScope', '$location', 'authService', 'storageService' ];
 module.exports = run;

@@ -1,6 +1,8 @@
 TO-DO
-  ☐ get/set for rememberMe value
+  ☐ bug register page?
+  ✔ get/set for rememberMe value @done (16-09-20 08:19)
   ☐ require CSS w/ browserify? → home template? @pa
+  ☐ using routing states to share header
   ☐ remember password via mail
   ☐ upload photos to s3bucket
   ☐ create Home Page + Profile Page + Photos Page

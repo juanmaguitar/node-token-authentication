@@ -5,7 +5,7 @@ function loginController($scope, $location, authService, storageService) {
   const username = 'juanmaguitar';
   const password = 'juanma100';
 
-	$scope.rememberMe = storageService.rememberMe;
+	//$scope.rememberMe = storageService.getRememberMe();
   $scope.user = { username, password };
  	$scope.login = login.bind(null, $scope, $location, authService, storageService );
 
