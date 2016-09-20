@@ -1,6 +1,6 @@
 function login( $scope, $location, authService, storageService ) {
 
-  storageService.rememberMe = $scope.rememberMe;
+  storageService.setRememberMe( $scope.rememberMe ? true : false );
 
   authService.login( $scope.user )
     .then( storageService.saveToken )

@@ -14,7 +14,7 @@ const moduleDependencies = [ngRoute, servicesModule, loginModule, registerModule
 
 angular.module('myApp', moduleDependencies).config(appConfig).run(appRun);
 
-},{"./config/config.js":2,"./config/run.js":3,"./home":6,"./login":10,"./register":13,"./services":22,"angular":34,"angular-route":32}],2:[function(require,module,exports){
+},{"./config/config.js":2,"./config/run.js":3,"./home":6,"./login":10,"./register":13,"./services":22,"angular":36,"angular-route":34}],2:[function(require,module,exports){
 function config($httpProvider, $routeProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 };
@@ -35,6 +35,7 @@ function run($rootScope, $location, authService) {
 		// console.log(event);
 		// console.log(nextRoute);
 		// console.log(currentRoute);
+		console.log(`isLoggedIn = ${ authService.isLoggedIn() }`);
 		const nextPath = nextRoute.$$route.originalPath;
 		$location.path(authService.isLoggedIn() ? nextPath : 'login');
 		//redirectIfLogged();
@@ -94,7 +95,7 @@ const homeModule = angular.module('myApp:home', [ngRoute, ngBootstrap, ngGravata
 
 module.exports = homeModule.name;
 
-},{"../services":22,"./config":4,"./controller":5,"angular":34,"angular-bootstrap-npm":27,"angular-gravatar":28,"angular-route":32}],7:[function(require,module,exports){
+},{"../services":22,"./config":4,"./controller":5,"angular":36,"angular-bootstrap-npm":29,"angular-gravatar":30,"angular-route":34}],7:[function(require,module,exports){
 
 const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n\n  <form class=\"form-signin\" ng-submit=\"login()\">\n    <h3 class=\"form-signin-heading\">Please Log in</h3>\n\n    <div class=\"alert alert-danger\" ng-show=\"error.message\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n      <p><strong>{{ error.message }}</strong></p>\n      <p>Please try again...</p>\n    </div>\n\n    <div ng-class=\"{ 'has-error': error.message }\">\n      <label for=\"inputUsername\" >Username</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"UserName...\" required autofocus ng-model=\"user.username\">\n    </div>\n    <div ng-class=\"{ 'has-error': error.message }\">\n      <label for=\"inputPassword\" >Password</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password...\" required ng-model=\"user.password\">\n    </div>\n    <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"true\" ng-model=\"rememberMe\"> Remember me\n      </label>\n    </div>\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Log in</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/register\">Sign up</a></strong> if still don't have an user</p>\n  </form>\n\n</div>\n\n";
 
@@ -129,7 +130,7 @@ module.exports = loginController;
 },{"./login.js":9}],9:[function(require,module,exports){
 function login($scope, $location, authService, storageService) {
 
-  storageService.rememberMe = $scope.rememberMe;
+  storageService.setRememberMe($scope.rememberMe ? true : false);
 
   authService.login($scope.user).then(storageService.saveToken).then(authService.setCredentials).then(() => {
     console.log('redirecting...');
@@ -155,7 +156,7 @@ const loginModule = angular.module('myApp:login', [ngRoute, appServices]).contro
 
 module.exports = loginModule.name;
 
-},{"../services":22,"./config":7,"./controller":8,"angular":34,"angular-route":32}],11:[function(require,module,exports){
+},{"../services":22,"./config":7,"./controller":8,"angular":36,"angular-route":34}],11:[function(require,module,exports){
 
 const htmlTemplate = "<div class=\"container\">\n  <h1 class=\"text-center\">My Super App ⚡️</h1>\n\n  <form class=\"form-signin\" ng-submit=\"createUser()\">\n    <h3 class=\"form-signin-heading\">Create a new user</h3>\n    <p><em>Fields with * are mandatory</em></p>\n\n    <div class=\"form-group\" ng-class=\"{ 'has-error': errors.usernameExists }\">\n      <label class=\"control-label\" for=\"inputUsername\" >User name *</label>\n      <input type=\"text\" id=\"inputUsername\" class=\"form-control\" placeholder=\"User Name\" required autofocus ng-model=\"user.username\">\n      <em ng-show=\"errors.usernameExists\" class=\"help-block text-right\">User Name already registered! </br>Please choose another one.</em>\n    </div>\n\n    <div class=\"form-group\" ng-class=\"{ 'has-error': errors.mailExists }\">\n      <label class=\"control-label\" for=\"inputEmail\" >Email address *</label>\n      <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required ng-model=\"user.email\">\n       <em ng-show=\"errors.mailExists\" class=\"help-block text-right\">Mail already registered! </br>Please choose another one.</em>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"inputPassword\" >Password *</label>\n      <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required ng-model=\"user.password\">\n    </div>\n\n    <!-- <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\n      </label>\n    </div> -->\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign Up</button>\n    <p class=\"text-right\">Or <strong><a href=\"#/login\">Log in</a></strong> if you already have an an user</p>\n\n  </form>\n\n</div>";
 
@@ -217,7 +218,7 @@ const registerModule = angular.module('myApp:register', ['ngRoute']).controller(
 
 module.exports = registerModule.name;
 
-},{"./config":11,"./controller":12,"angular":34,"angular-route":32}],14:[function(require,module,exports){
+},{"./config":11,"./controller":12,"angular":36,"angular-route":34}],14:[function(require,module,exports){
 const request = require('./methods/request.js');
 const responseError = require('./methods/responseError.js');
 
@@ -281,11 +282,9 @@ module.exports = authService;
 
 },{"./methods/isLoggedIn":18,"./methods/login":19,"./methods/logout":20,"./methods/setCredentials":21}],18:[function(require,module,exports){
 function isLoggedIn(storageService, jwtHelper) {
-
 	try {
 		var token = storageService.readToken();
 		var tokenPayload = jwtHelper.decodeToken(token);
-		console.log(`tokenPayload = ${ tokenPayload }`);
 		return !jwtHelper.isTokenExpired(token);
 	} catch (e) {
 		return false;
@@ -340,58 +339,74 @@ const authModule = angular.module('myApp:services', [ngStorage, ngJwt]).factory(
 
 module.exports = authModule.name;
 
-},{"./authInterceptor":14,"./authService":17,"./storage":23,"angular":34,"angular-jwt":30,"ng-storage":35}],23:[function(require,module,exports){
-let readToken = require('./methods/readToken');
-let saveToken = require('./methods/saveToken');
-let removeToken = require('./methods/removeToken');
+},{"./authInterceptor":14,"./authService":17,"./storage":23,"angular":36,"angular-jwt":32,"ng-storage":37}],23:[function(require,module,exports){
+let readToken = require('./methods/token/read');
+let saveToken = require('./methods/token/save');
+let removeToken = require('./methods/token/remove');
+
+let getRememberMe = require('./methods/rememberMe/get');
+let setRememberMe = require('./methods/rememberMe/set');
 
 function storage($localStorage, $sessionStorage) {
 
-	const keyStorage = 'myApp-token';
+	const keyStorageToken = 'myApp-token';
+	const keyStorageRemember = 'myApp-rememberMe';
 
-	this.rememberMe = false;
-	this.readToken = readToken.bind(this, keyStorage, $localStorage, $sessionStorage);
-	this.saveToken = saveToken.bind(this, keyStorage, $localStorage, $sessionStorage);
-	this.removeToken = removeToken.bind(this, keyStorage, $localStorage, $sessionStorage);
+	this.getRememberMe = getRememberMe.bind(this, keyStorageRemember, $localStorage);
+	this.setRememberMe = setRememberMe.bind(this, keyStorageRemember, $localStorage);
+
+	this.readToken = readToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
+	this.saveToken = saveToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
+	this.removeToken = removeToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
 }
 
 storage.$inject = ['$localStorage', '$sessionStorage'];
 
 module.exports = storage;
 
-},{"./methods/readToken":24,"./methods/removeToken":25,"./methods/saveToken":26}],24:[function(require,module,exports){
-function readToken(keyStorage, $localStorage, $sessionStorage) {
+},{"./methods/rememberMe/get":24,"./methods/rememberMe/set":25,"./methods/token/read":26,"./methods/token/remove":27,"./methods/token/save":28}],24:[function(require,module,exports){
+function getRememberMe(keyStorage, $localStorage) {
+	return $localStorage[keyStorage];
+}
 
-	const storage = this.rememberMe ? $localStorage : $sessionStorage;
+module.exports = getRememberMe;
+
+},{}],25:[function(require,module,exports){
+function setRememberMe(keyStorage, $localStorage, value) {
+	$localStorage[keyStorage] = value;
+	return value;
+}
+
+module.exports = setRememberMe;
+
+},{}],26:[function(require,module,exports){
+function readToken(keyStorage, $localStorage, $sessionStorage) {
+	const storage = !!this.getRememberMe() ? $localStorage : $sessionStorage;
 	return storage[keyStorage];
 }
 
 module.exports = readToken;
 
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 function removeToken(keyStorage, $localStorage, $sessionStorage) {
-
-	const storage = this.rememberMe ? $localStorage : $sessionStorage;
+	const storage = !!this.getRememberMe() ? $localStorage : $sessionStorage;
 	delete storage[keyStorage];
 }
 
 module.exports = removeToken;
 
-},{}],26:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 function saveToken(keyStorage, $localStorage, $sessionStorage, token) {
-
 	delete $sessionStorage[keyStorage];
 	delete $localStorage[keyStorage];
-
-	const storage = this.rememberMe ? $localStorage : $sessionStorage;
+	const storage = !!this.getRememberMe() ? $localStorage : $sessionStorage;
 	storage[keyStorage] = token;
-
 	return token;
 }
 
 module.exports = saveToken;
 
-},{}],27:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 /*
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
@@ -8895,7 +8910,7 @@ angular.module("template/typeahead/typeahead-popup.html", []).run(["$templateCac
     "");
 }]);
 !angular.$$csp() && angular.element(document).find('head').prepend('<style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style>');if(typeof module!=='undefined')module.exports='ui.bootstrap';
-},{}],28:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 /* jshint ignore:start */
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
@@ -9381,7 +9396,7 @@ angular.module('md5', []).constant('md5', (function() {
 
 }).call(this);
 
-},{}],29:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 (function() {
 
 
@@ -9736,12 +9751,12 @@ angular.module('angular-jwt.options', [])
   });
 
 }());
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 require('./dist/angular-jwt.js');
 module.exports = 'angular-jwt';
 
 
-},{"./dist/angular-jwt.js":29}],31:[function(require,module,exports){
+},{"./dist/angular-jwt.js":31}],33:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -10812,11 +10827,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],32:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":31}],33:[function(require,module,exports){
+},{"./angular-route":33}],35:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -42585,11 +42600,11 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],34:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":33}],35:[function(require,module,exports){
+},{"./angular":35}],37:[function(require,module,exports){
 'use strict';
 
 (function() {

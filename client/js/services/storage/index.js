@@ -1,15 +1,21 @@
-let readToken = require('./methods/readToken');
-let saveToken = require('./methods/saveToken');
-let removeToken = require('./methods/removeToken');
+let readToken = require('./methods/token/read');
+let saveToken = require('./methods/token/save');
+let removeToken = require('./methods/token/remove');
+
+let getRememberMe = require('./methods/rememberMe/get');
+let setRememberMe = require('./methods/rememberMe/set');
 
 function storage ( $localStorage, $sessionStorage  ) {
 
-	const keyStorage = 'myApp-token';
+	const keyStorageToken = 'myApp-token';
+	const keyStorageRemember = 'myApp-rememberMe';
 
-	this.rememberMe = false;
-	this.readToken = readToken.bind(this, keyStorage, $localStorage, $sessionStorage);
-	this.saveToken = saveToken.bind(this, keyStorage, $localStorage, $sessionStorage);
-	this.removeToken = removeToken.bind(this, keyStorage, $localStorage, $sessionStorage);
+	this.getRememberMe = getRememberMe.bind(this, keyStorageRemember, $localStorage);
+	this.setRememberMe = setRememberMe.bind(this, keyStorageRemember, $localStorage);
+
+	this.readToken = readToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
+	this.saveToken = saveToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
+	this.removeToken = removeToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
 
 }
 

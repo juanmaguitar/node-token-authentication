@@ -1,5 +1,6 @@
 function run ( $rootScope, $location, authService ) {
 
+
 	const redirectIfLogged = () => {
 		if ( !['/login','/register'].includes( $location.path() ) ) {
 			$location.path( authService.isLoggedIn() ? 'home' : 'login' );
@@ -10,6 +11,7 @@ function run ( $rootScope, $location, authService ) {
 		// console.log(event);
 		// console.log(nextRoute);
 		// console.log(currentRoute);
+		console.log( `isLoggedIn = ${authService.isLoggedIn()}` );
 		const nextPath = nextRoute.$$route.originalPath;
 		$location.path( authService.isLoggedIn() ? nextPath : 'login' );
 		//redirectIfLogged();

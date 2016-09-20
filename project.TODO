@@ -1,7 +1,5 @@
 TO-DO
-  ☐ use sessionStorage or localStorage depending on "remember me" checking @pa
-  ☐ checkbox value true|false @pa
-  ☐ load bootstrap (angular version) → menu profile (logout) @pa
+  ☐ get/set for rememberMe value
   ☐ require CSS w/ browserify? → home template? @pa
   ☐ remember password via mail
   ☐ upload photos to s3bucket
@@ -15,6 +13,9 @@ TO-DO
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ use sessionStorage or localStorage depending on "remember me" checking @pa @done (16-09-20 08:01)
+ ✔ checkbox value true|false @pa @done (16-09-20 08:02)
+ ✔ load bootstrap (angular version) → menu profile (logout) @pa @done (16-09-20 08:02)
  ✔ Change of URL → detect if user is logged → if not to login page @done (16-09-16 20:35)
  ✔ user service method in another service method @done (16-09-16 20:15)
  ✔ User Service in Controllers @done (16-09-16 20:15)
