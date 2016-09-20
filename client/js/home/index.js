@@ -7,6 +7,7 @@ const ngGravatar = require('angular-gravatar') && 'ui.gravatar';
 
 console.log(ngGravatar);
 
+
 const appServices = require('../services');
 
 const homeController = require('./controller')
