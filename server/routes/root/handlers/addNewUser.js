@@ -11,13 +11,9 @@ function addNewUser(req, res) {
 
   user.save()
     .then( ( result ) => {
-      console.log(result);
-      console.log('User saved successfully');
       res.json({ success: true });
     })
     .catch((err) => {
-
-      console.log(err)
 
       const success = false;
       let code = ERR_SOMETHING_DUPLICATED;

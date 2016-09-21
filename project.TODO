@@ -1,8 +1,6 @@
 TO-DO
-  ☐ require CSS w/ browserify? → home template? @pa
-  ✔ bug register page? @done (16-09-20 10:39)
-  ✔ get/set for rememberMe value @done (16-09-20 08:19)
   ☐ using routing states to share header
+  ☐ control numbers logins
   ☐ remember password via mail
   ☐ upload photos to s3bucket
   ☐ create Home Page + Profile Page + Photos Page
@@ -15,6 +13,9 @@ TO-DO
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ require CSS w/ browserify? → home template? @pa @done (16-09-21 14:37)
+ ✔ bug register page? @done (16-09-20 10:39)
+ ✔ get/set for rememberMe value @done (16-09-20 08:19)
  ✔ use sessionStorage or localStorage depending on "remember me" checking @pa @done (16-09-20 08:01)
  ✔ checkbox value true|false @pa @done (16-09-20 08:02)
  ✔ load bootstrap (angular version) → menu profile (logout) @pa @done (16-09-20 08:02)
