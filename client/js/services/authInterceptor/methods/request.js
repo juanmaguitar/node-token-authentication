@@ -1,8 +1,9 @@
-function request($localStorage, config) {
+function request(storageService, config) {
   config.headers = config.headers || {};
+	const token = storageService.readToken();
 
-	if ($localStorage.token) {
-    config.headers.Authorization = 'Bearer ' + $$localStorage.token;
+	if ( token ) {
+    config.headers.Authorization = 'Bearer ' + token;
   }
   else {
   	console.log('no token detected...')

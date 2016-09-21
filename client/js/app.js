@@ -1,8 +1,6 @@
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
-require('./styles.scss');
-
 const loginModule = require('./login');
 const registerModule = require('./register');
 const homeModule = require('./home');

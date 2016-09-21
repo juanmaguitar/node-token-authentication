@@ -5,23 +5,27 @@ let removeToken = require('./methods/token/remove');
 let getRememberMe = require('./methods/rememberMe/get');
 let setRememberMe = require('./methods/rememberMe/set');
 
-function storage ( $localStorage, $sessionStorage  ) {
+function storage ( $window  ) {
 
-	const keyStorageToken = 'myApp-token';
-	const keyStorageRemember = 'myApp-rememberMe';
+	const keyToken = 'myApp-token';
+	const keyRemember = 'myApp-rememberMe';
 
-	this.getRememberMe = getRememberMe.bind(this, keyStorageRemember, $localStorage);
-	this.setRememberMe = setRememberMe.bind(this, keyStorageRemember, $localStorage);
+	console.log ($window );
 
-	this.readToken = readToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
-	this.saveToken = saveToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
-	this.removeToken = removeToken.bind(this, keyStorageToken, $localStorage, $sessionStorage);
+	const $localStorage = $window.localStorage;
+	const $sessionStorage = $window.sessionStorage;
+
+	this.getRememberMe = getRememberMe.bind(this, keyRemember, $localStorage);
+	this.setRememberMe = setRememberMe.bind(this, keyRemember, $localStorage);
+
+	this.readToken = readToken.bind(this, keyToken, $localStorage, $sessionStorage);
+	this.saveToken = saveToken.bind(this, keyToken, $localStorage, $sessionStorage);
+	this.removeToken = removeToken.bind(this, keyToken, $localStorage, $sessionStorage);
 
 }
 
 storage.$inject = [
-	'$localStorage',
-	'$sessionStorage'
+	'$window'
 ];
 
 module.exports = storage;

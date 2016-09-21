@@ -1,12 +1,11 @@
 const angular = require('angular');
 
+require('./styles.scss');
+
 // dependencies
 const ngRoute = require('angular-route');
 const ngBootstrap = require('angular-bootstrap-npm');
 const ngGravatar = require('angular-gravatar') && 'ui.gravatar';
-
-console.log(ngGravatar);
-
 
 const appServices = require('../services');
 
